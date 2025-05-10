@@ -1,0 +1,202 @@
+<div class="contact-container min-h-screen flex flex-col" style="margin-top: 30px;">
+  <div class="animated-background">
+    <div class="gradient-circle gradient-circle-1"></div>
+    <div class="gradient-circle gradient-circle-2"></div>
+    <div class="floating-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+    </div>
+  </div>
+
+  <!-- TOP NAV -->
+  <app-header></app-header>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    <div class="container">
+      <div class="page-header scroll-reveal">
+        <h1 class="title">Contact <span class="gradient-text">Support</span></h1>
+        <div class="subtitle-container">
+          <div class="icon-circle">
+            <i class="fas fa-headset"></i>
+          </div>
+          <p class="description">
+            Our team is ready to assist you. Fill out the form below and we'll respond promptly.
+          </p>
+        </div>
+      </div>
+
+      <div class="contact-card-container scroll-reveal">
+        <div class="contact-options">
+          <div class="contact-option" [class.active]="activeOption === 'support'" (click)="setActiveOption('support')">
+            <div class="option-icon purple">
+              <i class="fas fa-life-ring"></i>
+            </div>
+            <div class="option-text">
+              <h3>Support Request</h3>
+              <p>Get help with technical issues</p>
+            </div>
+          </div>
+          
+          <div class="contact-option" [class.active]="activeOption === 'feedback'" (click)="setActiveOption('feedback')">
+            <div class="option-icon pink">
+              <i class="fas fa-comment-dots"></i>
+            </div>
+            <div class="option-text">
+              <h3>Feedback</h3>
+              <p>Share your thoughts with us</p>
+            </div>
+          </div>
+          
+          <div class="contact-option" [class.active]="activeOption === 'inquiry'" (click)="setActiveOption('inquiry')">
+            <div class="option-icon orange">
+              <i class="fas fa-question-circle"></i>
+            </div>
+            <div class="option-text">
+              <h3>General Inquiry</h3>
+              <p>Ask us anything about Nestify</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-container">
+          <div *ngIf="errorMessage" class="message error">
+            <i class="fas fa-exclamation-triangle"></i>
+            <p>{{ errorMessage }}</p>
+          </div>
+    
+          <div *ngIf="successMessage" class="message success">
+            <i class="fas fa-check-circle"></i>
+            <p>{{ successMessage }}</p>
+          </div>
+
+          <form (ngSubmit)="onSubmit()" #supportForm="ngForm" class="animated-form">
+            <div class="form-progress">
+              <div class="progress-bar">
+                <div class="progress-fill" [style.width]="formProgress + '%'"></div>
+              </div>
+              <div class="progress-text">{{ formProgress }}% Complete</div>
+            </div>
+
+            <div class="form-fields">
+              <div class="form-group">
+                <label for="name">
+                  <i class="fas fa-user"></i>
+                  <span>Full Name</span>
+                </label>
+                <input
+                  id="name"
+                  type="text"
+                  [(ngModel)]="name"
+                  (ngModelChange)="updateFormProgress()"
+                  name="name"
+                  placeholder="Enter your name"
+                  required
+                  class="hover-effect"
+                />
+              </div>
+              
+              <div class="form-group">
+                <label for="email">
+                  <i class="fas fa-envelope"></i>
+                  <span>Email Address</span>
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  [(ngModel)]="email"
+                  (ngModelChange)="updateFormProgress()"
+                  name="email"
+                  placeholder="Enter your email"
+                  required
+                  class="hover-effect"
+                />
+              </div>
+              
+              <div class="form-group">
+                <label for="message">
+                  <i class="fas fa-comment"></i>
+                  <span>Message</span>
+                </label>
+                <textarea
+                  id="message"
+                  [(ngModel)]="message"
+                  (ngModelChange)="updateFormProgress()"
+                  name="message"
+                  rows="4"
+                  placeholder="How can we help you?"
+                  required
+                  class="hover-effect"
+                ></textarea>
+              </div>
+
+              <div class="checkbox-group">
+                <div class="checkbox-wrapper">
+                  <input 
+                    type="checkbox" 
+                    id="newsletter" 
+                    name="newsletter" 
+                    [(ngModel)]="newsletter"
+                    class="styled-checkbox" 
+                  />
+                  <label for="newsletter">Subscribe to our newsletter</label>
+                </div>
+              </div>
+            </div>
+            
+            <button
+              type="submit"
+              class="submit-button"
+              [disabled]="isSubmitting || !supportForm.form.valid"
+            >
+              <span *ngIf="isSubmitting" class="loading-spinner">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Submitting...
+              </span>
+              <span *ngIf="!isSubmitting">
+                <i class="fas fa-paper-plane"></i> Submit Request
+              </span>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="contact-info-cards scroll-reveal">
+        <div class="info-card">
+          <div class="info-icon">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <h3>Our Location</h3>
+          <p>123 Nestify Tower,Nairobi</p>
+          <p>Moi Avenue</p>
+        </div>
+        
+        <div class="info-card">
+          <div class="info-icon">
+            <i class="fas fa-phone-alt"></i>
+          </div>
+          <h3>Call Us</h3>
+          <p>Support: +254795704273</p>
+          <p>Sales: +254795704273</p>
+        </div>
+        
+        <div class="info-card">
+          <div class="info-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <h3>Business Hours</h3>
+          <p>Monday-Friday: 9AM-6PM</p>
+          <p>Weekend: 10AM-4PM</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <app-footer></app-footer>
+</div>

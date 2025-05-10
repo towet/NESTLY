@@ -1,0 +1,65 @@
+<div class="calendar-container">
+    <!-- Calendar Header -->
+    <div class="calendar-header">
+      <button (click)="previousMonth()" 
+              [disabled]="!canNavigatePrevious()"
+              class="nav-button">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <h2 class="month-title">
+        {{monthNames[currentMonth.getMonth()]}} {{currentMonth.getFullYear()}}
+      </h2>
+      <button (click)="nextMonth()"
+              [disabled]="!canNavigateNext()"
+              class="nav-button">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+  
+    <!-- Calendar Grid -->
+    <div class="calendar-grid">
+      <!-- Weekday Headers -->
+      <div class="weekday-header">Sun</div>
+      <div class="weekday-header">Mon</div>
+      <div class="weekday-header">Tue</div>
+      <div class="weekday-header">Wed</div>
+      <div class="weekday-header">Thu</div>
+      <div class="weekday-header">Fri</div>
+      <div class="weekday-header">Sat</div>
+  
+      <!-- Calendar Days -->
+      <ng-container *ngFor="let week of weeks">
+        <div *ngFor="let date of week"
+             class="calendar-day"
+             [class.other-month]="date.getMonth() !== currentMonth.getMonth()"
+             [class.available]="isDateAvailable(date)"
+             [class.selected]="isDateSelected(date)"
+             [class.hover-range]="isDateInHoverRange(date)"
+             [class.disabled]="!isDateAvailable(date)"
+             (click)="onDateClick(date)"
+             (mouseenter)="onDateHover(date)">
+          <span class="date-number">{{date.getDate()}}</span>
+          <span *ngIf="showPrices && isDateAvailable(date)" class="price">
+            ${{getDatePrice(date)}}
+          </span>
+        </div>
+      </ng-container>
+    </div>
+  
+    <!-- Legend -->
+    <div class="calendar-legend">
+      <div class="legend-item">
+        <div class="legend-color available"></div>
+        <span>Available</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color booked"></div>
+        <span>Booked</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color selected"></div>
+        <span>Selected</span>
+      </div>
+    </div>
+  </div>
+  

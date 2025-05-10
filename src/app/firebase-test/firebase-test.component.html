@@ -1,0 +1,11 @@
+<div class="firebase-test-container">
+    <h2>Firebase Users Collection Test</h2>
+    <ng-container *ngIf="usersData$ | async as users; else loading">
+      <p>Data from the "users" collection:</p>
+      <pre>{{ users | json }}</pre>
+    </ng-container>
+    <ng-template #loading>
+      <p>Loading data from Firebase...</p>
+    </ng-template>
+  </div>
+  

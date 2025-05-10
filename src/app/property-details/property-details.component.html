@@ -1,0 +1,934 @@
+<app-header></app-header>
+
+<!-- Property Showcase Section -->
+<div class="property-showcase" *ngIf="property">
+  <!-- Premium Image Gallery -->
+  <div class="premium-image-gallery" *ngIf="property?.images?.length" data-aos="fade-up" data-aos-duration="800">
+    <!-- Main hero image -->
+    <div class="gallery-container">
+      <!-- Large hero image -->
+      <div class="gallery-main-image" *ngIf="property.images[0]" (click)="openGallery(0)">
+        <img [src]="property.images[0]" [alt]="property.title + ' main image'">
+        <div class="image-overlay">
+          <div class="overlay-content">
+            <h1 class="property-title">{{ property.title }}</h1>
+            <div class="property-quick-info">
+              <div class="quick-info-item">
+                <div class="icon-circle purple">
+                  <i class="fas fa-bed"></i>
+                </div>
+                <span>{{ property.bedrooms }} Beds</span>
+              </div>
+              <div class="quick-info-item">
+                <div class="icon-circle blue">
+                  <i class="fas fa-bath"></i>
+                </div>
+                <span>{{ property.bathrooms }} Baths</span>
+              </div>
+              <div class="quick-info-item">
+                <div class="icon-circle orange">
+                  <i class="fas fa-ruler-combined"></i>
+                </div>
+                <span>{{ property.propertySize }} sq ft</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Thumbnail grid -->
+      <div class="gallery-thumbnails">
+        <ng-container *ngFor="let img of property.images.slice(1,5); let idx = index">
+          <div class="thumbnail-item" (click)="openGallery(idx + 1)">
+            <img [src]="img" [alt]="property.title + ' image ' + (idx + 2)">
+            <div class="thumbnail-overlay"></div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    
+    <!-- Premium gallery actions -->
+    <div class="gallery-actions">
+      <button class="action-button view-all-photos" *ngIf="property.images.length > 5" (click)="openGallery(0)">
+        <div class="button-icon">
+          <i class="fas fa-images"></i>
+        </div>
+        <span>View All Photos ({{ property.images.length }})</span>
+      </button>
+      
+      <button class="action-button share-property" (click)="shareProperty()">
+        <div class="button-icon">
+          <i class="fas fa-share-alt"></i>
+        </div>
+        <span>Share</span>
+      </button>
+      
+      <button class="action-button save-property" (click)="toggleFavorite()">
+        <div class="button-icon">
+          <i class="fas" [ngClass]="isFavorite ? 'fa-heart' : 'fa-heart-o'"></i>
+        </div>
+        <span>{{ isFavorite ? 'Saved' : 'Save' }}</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ── New “Listing Info” Section ── -->
+<div class="container">
+<div class="listing-info row gx-4 my-5" *ngIf="property">
+  <!-- Left: quick price/location/fee overview -->
+  <div class="col-lg-8">
+    <div class="overview d-flex flex-wrap align-items-center gap-3">
+      <h2 class="price">KSH {{ property.price | number }}<small>/{{ property['paymentFrequency'] }}</small></h2>
+      <span class="badge bg-light text-dark">
+        <i class="fas fa‑{{ property.propertyType === 'Studio Apartment' ? 'bed' : 'home' }} me-1"></i>
+        {{ property.propertyType }}
+      </span>
+      <span class="text-muted">
+        <i class="fas fa-map-marker-alt me-1"></i>
+        {{ property.location }}
+      </span>
+      <span *ngIf="property['furnishing']" class="text-muted">
+               • {{ property['furnishing'] }}
+      </span>
+      <span *ngIf="property['agentChargesViewingFee']" class="text-warning">
+        <i class="fas fa-exclamation-triangle me-1"></i>
+        Agent charges viewing fee
+      </span>
+    </div>
+
+      <!-- Amenities Available - Modern Design -->
+  <div class="amenities-available mt-5">
+    <div class="section-header">
+      <h4><span class="highlight">Amenities</span> Available</h4>
+      <div class="section-divider"></div>
+    </div>
+    
+    <div class="modern-amenities-grid">
+      <div class="modern-amenity-item" *ngFor="let amenity of property.amenities; let i = index" [attr.data-aos]="'fade-up'" [attr.data-aos-delay]="i * 50">
+        <div class="icon-circle" [ngClass]="{
+          'purple': i % 5 === 0,
+          'pink': i % 5 === 1,
+          'green': i % 5 === 2,
+          'orange': i % 5 === 3,
+          'blue': i % 5 === 4
+        }">
+          <i [class]="getAmenityIcon(amenity)"></i>
+        </div>
+        <div class="amenity-name">{{ formatAmenityLabel(amenity) }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Types & Setting - Modern Design -->
+  <div class="types-setting mt-5">
+    <div class="section-header">
+      <h4><span class="highlight">Types</span> & Setting</h4>
+      <div class="section-divider"></div>
+    </div>
+    
+    <div class="types-grid">
+      <!-- Category -->
+      <div class="type-card" *ngIf="property?.['category']" data-aos="fade-right">
+        <div class="type-icon">
+          <i class="fas fa-building"></i>
+        </div>
+        <div class="type-content">
+          <div class="type-label">Category</div>
+          <div class="type-value">{{ formatLabel(property?.['category'] || '') }}</div>
+        </div>
+      </div>
+      
+      <!-- Sub-category -->
+      <div class="type-card" *ngIf="property?.['subCategory']" data-aos="fade-right" data-aos-delay="100">
+        <div class="type-icon">
+          <i class="fas fa-home"></i>
+        </div>
+        <div class="type-content">
+          <div class="type-label">Sub-category</div>
+          <div class="type-value">{{ formatLabel(property?.['subCategory'] || '') }}</div>
+        </div>
+      </div>
+      
+      <!-- Detail -->
+      <div class="type-card" *ngIf="property?.['detail']" data-aos="fade-right" data-aos-delay="200">
+        <div class="type-icon">
+          <i class="fas fa-info-circle"></i>
+        </div>
+        <div class="type-content">
+          <div class="type-label">Detail</div>
+          <div class="type-value">{{ formatLabel(property?.['detail'] || '') }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  </div>
+
+  <!-- Right: “Listed By” & “Request Call Back” cards -->
+  <div class="col-lg-4">
+    <!-- Agent Contact - Minimal Stylish Design -->
+    <div class="agent-contact-minimal">
+      <div class="agent-badge">
+        <div class="agent-presence">
+          <img [src]="property.agent.photo || 'assets/user.png'" alt="Agent" class="agent-image">
+          <span class="status-indicator {{ agentOnline ? 'online' : 'offline' }}"></span>
+        </div>
+        <div class="agent-quick-info">
+          <div class="agent-badge-name">{{ property.agent.name }}</div>
+          <div class="agent-badge-role">Property Specialist</div>
+        </div>
+      </div>
+      
+      <div class="property-listing-meta">
+        <div class="meta-item">
+          <div class="meta-icon-circle pink">
+            <i class="fas fa-clock"></i>
+          </div>
+          <div class="meta-content">
+            <span class="meta-value">{{ daysSince(property['createdAt']) }}</span>
+            <span class="meta-label">days listed</span>
+          </div>
+        </div>
+        
+        <div class="meta-item">
+          <div class="meta-icon-circle purple">
+            <i class="fas fa-home"></i>
+          </div>
+          <div class="meta-content">
+            <span class="meta-value">{{ 12 }}</span>
+            <span class="meta-label">properties</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="agent-contact-actions">
+        <button class="contact-action-btn call" (click)="callAgent()">
+          <i class="fas fa-phone-alt"></i>
+          <span>Call</span>
+        </button>
+        
+        <button class="contact-action-btn message" (click)="messageAgent()">
+          <i class="fab fa-whatsapp"></i>
+          <span>Message</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Request Call Back - Ultra Modern Design -->
+    <div class="callback-card">
+      <div class="callback-glass-effect"></div>
+      
+      <div class="callback-header">
+        <div class="callback-icon-wrapper">
+          <div class="callback-icon">
+            <i class="fas fa-phone-alt"></i>
+          </div>
+          <div class="pulse-ring"></div>
+        </div>
+        <h5 class="callback-title">Request <span class="highlight">Call Back</span></h5>
+      </div>
+      
+      <div class="callback-content">
+        <p class="callback-description">
+          Unable to reach the agent? Simply request a call back to alert them to contact you.
+        </p>
+        
+        <button class="callback-button" (click)="requestCallBack()">
+          <div class="button-background"></div>
+          <div class="button-content">
+            <span class="button-text">Request Call Back</span>
+            <span class="button-icon">
+              <i class="fas fa-headset"></i>
+            </span>
+          </div>
+        </button>
+        
+        <div class="callback-timing">
+          <div class="timing-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <p class="timing-text">Usually responds within 2 hours</p>
+        </div>
+      </div>
+      
+      <div class="callback-decoration">
+        <div class="decoration-circle circle-1"></div>
+        <div class="decoration-circle circle-2"></div>
+        <div class="decoration-circle circle-3"></div>
+        <div class="decoration-line line-1"></div>
+        <div class="decoration-line line-2"></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- About the House - Ultra Modern Design -->
+<div class="about-house-container" *ngIf="property">
+  <div class="about-house-card">
+    <div class="glass-effect"></div>
+    
+    <!-- Header with animated accents -->
+    <div class="about-header">
+      <div class="header-accent"></div>
+      <div class="header-icon">
+        <i class="fas fa-home"></i>
+      </div>
+      <h3 class="section-title">About the <span class="highlight">House</span></h3>
+    </div>
+    
+    <!-- Property Title Section with Badge -->
+    <div class="property-identity">
+      <div class="title-badge">
+        <div class="badge-icon">
+          <i class="fas fa-building"></i>
+        </div>
+      </div>
+      <div class="identity-content">
+        <h4 class="property-title">{{ property.title }}</h4>
+        <div class="property-category">
+          <span class="category-type">{{ property?.propertyType }}</span>
+          <span class="separator">
+            <i class="fas fa-circle"></i>
+          </span>
+          <span class="sub-category">{{ formatLabel(property?.subCategory || '') }}</span>
+          <span *ngIf="property?.detail" class="detail">
+            <i class="fas fa-angle-right"></i> {{ property.detail }}
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Award-Winning Quick Facts Section with Utilities -->
+    <div class="premium-facts-showcase">
+      <div class="facts-showcase-backdrop">
+        <div class="backdrop-glow pulse-animation"></div>
+        <div class="backdrop-pattern"></div>
+      </div>
+      
+      <div class="facts-content-wrapper">
+        <!-- Modern Property Stats with Circular Icons -->
+        <div class="modern-stats-container">
+          <!-- Property Size Stat -->
+          <div class="modern-stat-item" data-aos="fade-up" data-aos-delay="100">
+            <div class="icon-circle orange">
+              <i class="fas fa-ruler-combined"></i>
+            </div>
+            <div class="stat-info">
+              <div class="stat-value">{{ property && property['size'] || '5000' }}<span class="stat-unit">sq ft</span></div>
+              <div class="stat-label">PROPERTY SIZE</div>
+            </div>
+          </div>
+          
+          <!-- Bedrooms Stat -->
+          <div class="modern-stat-item" data-aos="fade-up" data-aos-delay="150">
+            <div class="icon-circle blue">
+              <i class="fas fa-bed"></i>
+            </div>
+            <div class="stat-info">
+              <div class="stat-value">{{ property?.bedrooms || '0' }}</div>
+              <div class="stat-label">BEDROOMS</div>
+            </div>
+          </div>
+          
+          <!-- Bathrooms Stat -->
+          <div class="modern-stat-item" data-aos="fade-up" data-aos-delay="200">
+            <div class="icon-circle purple">
+              <i class="fas fa-bath"></i>
+            </div>
+            <div class="stat-info">
+              <div class="stat-value">{{ property?.bathrooms || '4' }}</div>
+              <div class="stat-label">BATHROOMS</div>
+            </div>
+          </div>
+          
+          <!-- Year Built Stat -->
+          <div class="modern-stat-item" data-aos="fade-up" data-aos-delay="250">
+            <div class="icon-circle pink">
+              <i class="fas fa-calendar-alt"></i>
+            </div>
+            <div class="stat-info">
+              <div class="stat-value">{{ property?.['yearBuilt'] || '2017' }}</div>
+              <div class="stat-label">YEAR BUILT</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Furnishing & Utilities (Side-by-side with stats) -->
+        <div class="utilities-container">
+          <div class="utilities-header">
+            <div class="utilities-icon">
+              <i class="fas fa-couch"></i>
+            </div>
+            <h5>Furnishing & Utilities</h5>
+          </div>
+          
+          <div class="utilities-content">
+            <div class="furnishing-status">
+              <span class="status-indicator">
+                <i class="fas fa-circle"></i>
+              </span>
+              This home is <strong class="furnishing-type">{{ property?.['furnishing'] || 'unfurnished' }}</strong>
+            </div>
+            
+            <div class="utilities-badges">
+              <span class="included-text">and comes with:</span>
+              <div class="badges-wrapper">
+                <ng-container *ngFor="let util of getUtilityList(); let i = index">
+                  <div class="utility-badge" [attr.data-aos]="'fade-up'" [attr.data-aos-delay]="i * 50 + 100">
+                    <i class="fas fa-check-circle"></i>
+                    <span>{{ util }}</span>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    <!-- Narrative Description -->
+   
+    
+
+    
+    <!-- Decorative Elements -->
+    <div class="decorative-elements">
+      <div class="deco-circle circle-1"></div>
+      <div class="deco-circle circle-2"></div>
+      <div class="deco-circle circle-3"></div>
+      <div class="deco-line line-1"></div>
+      <div class="deco-line line-2"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Property Details Container -->
+<div class="property-details-container">
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-state">
+    <ngb-progressbar
+      type="primary"
+      [striped]="true"
+      [animated]="true"
+      [value]="100"
+      height="4px">
+    </ngb-progressbar>
+    <span class="loading-text">Loading property details...</span>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error" class="error-state">
+    <div class="alert alert-danger" role="alert">
+      {{ error }}
+      <button class="btn btn-outline-danger ms-3" (click)="loadPropertyDetails()">
+        Try Again
+      </button>
+    </div>
+  </div>
+
+  <!-- Property Content -->
+  <ng-container *ngIf="property && !isLoading && !error">
+    <!-- Property Header -->
+
+
+
+    <!-- Tabs Section -->
+    <div class="property-tabs mt-4">
+      <ul ngbNav #nav="ngbNav" [(activeId)]="activeTab" class="nav-tabs">
+        <!-- Overview Tab -->
+        <li [ngbNavItem]="'overview'">
+          <a ngbNavLink>
+            <i class="fas fa-home me-2"></i>Overview
+          </a>
+          <ng-template ngbNavContent>
+            <ngb-accordion [activeIds]="['description','details']" [closeOthers]="false">
+              <!-- Description Panel -->
+              <ngb-panel id="description">
+                <ng-template ngbPanelHeader>
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-info-circle me-2"></i>
+                    Description
+                  </div>
+                </ng-template>
+                <ng-template ngbPanelContent>
+                  <p [class.line-clamp-3]="!showFullDescription">
+                    {{ property?.description }}
+                  </p>
+                  <button *ngIf="property.description.length > 300" 
+                          class="btn btn-link p-0"
+                          (click)="showFullDescription = !showFullDescription">
+                    {{ showFullDescription ? 'Show less' : 'Read more' }}
+                  </button>
+                </ng-template>
+              </ngb-panel>
+
+              <!-- Details Panel -->
+              <ngb-panel id="details">
+                <ng-template ngbPanelHeader let-panel>
+                  <div ngbPanelToggle class="d-flex align-items-center">
+                    <i class="fas fa-list me-2"></i>
+                    Property Details
+                  </div>
+                </ng-template>
+                <ng-template ngbPanelContent>
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <div class="detail-item">
+                        <span class="detail-label">Property Type</span>
+                        <span class="detail-value">{{ property?.propertyType }}</span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="detail-item">
+                        <span class="detail-label">Category</span>
+                        <span class="detail-value">{{ property?.category }}</span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="detail-item">
+                        <span class="detail-label">Sub-category</span>
+                        <span class="detail-value">{{ property?.subCategory }}</span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="detail-item">
+                        <span class="detail-label">Detail</span>
+                        <span class="detail-value">{{ property?.detail }}</span>
+                      </div>
+                    </div>
+                                <!-- Specifications -->
+                    <div class="col-md-6">
+                      <div class="detail-item">
+                      <span class="detail-label">Bedrooms</span>
+                      <span class="detail-value">{{ property?.bedrooms }}</span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="detail-item">
+                        <span class="detail-label">Bathrooms</span>
+                        <span class="detail-value">{{ property?.bathrooms }}</span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="detail-item">
+                        <span class="detail-label">Property Size</span>
+                        <span class="detail-value">{{ property?.propertySize }} sq ft</span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="detail-item">
+                        <span class="detail-label">Year Built</span>
+                        <span class="detail-value">{{ property?.yearBuilt }}</span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="detail-item">
+                        <span class="detail-label">Parking Spaces</span>
+                        <span class="detail-value">{{ property?.parkingSpaces }}</span>
+                      </div>
+                    </div>
+                       <!-- Additional Details -->
+                    <div class="col-md-6" *ngIf="property?.['furnishing']">
+                      <div class="detail-item">
+                        <span class="detail-label">Furnishing</span>
+                        <span class="detail-value">{{ property?.['furnishing'] }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-panel>
+            </ngb-accordion>
+          </ng-template>
+        </li>
+
+        <!-- Features Tab -->
+        <li [ngbNavItem]="'features'">
+          <a ngbNavLink>
+            <i class="fas fa-star me-2"></i>Features
+          </a>
+          <ng-template ngbNavContent>
+            <div class="amenities-container">
+              <!-- Amenities section with consistent circular icons -->
+              <div class="amenities-grid">
+                <div *ngFor="let amenity of property.amenities; let i = index" class="amenity-item">
+                  <div class="icon-circle" [ngClass]="{
+                    'purple': i % 5 === 0,
+                    'pink': i % 5 === 1,
+                    'green': i % 5 === 2,
+                    'orange': i % 5 === 3,
+                    'blue': i % 5 === 4
+                  }">
+                    <i class="{{ getAmenityIcon(amenity) }}"></i>
+                  </div>
+                  <span class="amenity-name">{{ amenity }}</span>
+                </div>
+              </div>
+              
+              <!-- Additional Features section -->
+              <h3 class="features-title mt-5 mb-4">
+                <span class="title-accent"></span>
+                Additional Features
+              </h3>
+              <div class="features-container">
+                <div *ngFor="let feature of property.features; let i = index" class="feature-tag">
+                  <div class="tag-icon" [ngClass]="{
+                    'purple': i % 5 === 3,
+                    'pink': i % 5 === 0,
+                    'green': i % 5 === 2,
+                    'orange': i % 5 === 1,
+                    'blue': i % 5 === 4
+                  }">
+                    <i class="fas fa-check"></i>
+                  </div>
+                  <span>{{ feature }}</span>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </li>
+
+        <!-- Location Tab -->
+        <li [ngbNavItem]="'location'">
+          <a ngbNavLink>
+            <i class="fas fa-map-marker-alt me-2"></i>Location
+          </a>
+          <ng-template ngbNavContent>
+            <div class="location-content">
+              <!-- Map Component -->
+              <div class="map-container">
+                <app-area-map
+                  [mapMarkers]="[{
+                    id: property.id,
+                    latitude: property.coordinates?.lat || 0,
+                    longitude: property.coordinates?.lng || 0,
+                    title: property.title,
+                    price: property.price,
+                    type: property.propertyType
+                  }]"
+                  [center]="[
+                  property.coordinates?.lat || 0,
+                  property.coordinates?.lng || 0
+                  ]"
+                  [zoom]="15"
+                  height="400px"
+                  (markerClick)="onMarkerClick($event)">
+                </app-area-map>
+              </div>
+
+                    <!-- Show message if coordinates are not available -->
+      <div *ngIf="!property.coordinates" class="alert alert-warning">
+        <i class="fas fa-exclamation-triangle me-2"></i>
+        Location information is not available for this property.
+      </div>
+
+              <!-- Nearby Places -->
+              <div class="nearby-places mt-4" *ngIf="property.nearbyPlaces">
+                <h3>
+                  <i class="fas fa-compass me-2"></i>
+                  Nearby Places
+                </h3>
+                <div class="row g-3">
+                  <div class="col-md-6" *ngFor="let place of property.nearbyPlaces">
+                    <div class="place-card">
+                      <i class="fas fa-map-marker-alt text-primary"></i>
+                      <div class="place-info">
+                        <div class="place-name">{{ place.name }}</div>
+                        <div class="place-meta">{{ place.type }} • {{ place.distance }}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </li>
+
+        <!-- Amenities Tab -->
+
+      </ul>
+      
+      <div [ngbNavOutlet]="nav" class="mt-3"></div>
+    </div>
+
+    <!-- Modern Property Details Section -->
+<div class="property-specs-section">
+  <div class="specs-container">
+    <div class="specs-header">
+      <div class="specs-icon">
+        <i class="fas fa-clipboard-list"></i>
+      </div>
+      <h2 class="specs-title">Property Details</h2>
+    </div>
+    
+    <div class="specs-content">
+      <!-- Main Specs Grid -->
+      <div class="specs-grid">
+        <!-- Property Type -->
+        <div class="spec-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="spec-icon">
+            <i class="fas fa-building"></i>
+          </div>
+          <div class="spec-details">
+            <div class="spec-label">Property Type</div>
+            <div class="spec-value">{{ property.propertyType || 'Commercial' }}</div>
+          </div>
+          <div class="hover-accent"></div>
+        </div>
+        
+        <!-- Category -->
+        <div class="spec-card" data-aos="fade-up" data-aos-delay="150">
+          <div class="spec-icon">
+            <i class="fas fa-tag"></i>
+          </div>
+          <div class="spec-details">
+            <div class="spec-label">Category</div>
+            <div class="spec-value">{{ property.category || 'Commercial' }}</div>
+          </div>
+          <div class="hover-accent"></div>
+        </div>
+        
+        <!-- Sub Category -->
+        <div class="spec-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="spec-icon">
+            <i class="fas fa-sitemap"></i>
+          </div>
+          <div class="spec-details">
+            <div class="spec-label">Sub Category</div>
+            <div class="spec-value">{{ property.subCategory || 'Retail Spaces' }}</div>
+          </div>
+          <div class="hover-accent"></div>
+        </div>
+        
+        <!-- Detail -->
+        <div class="spec-card" data-aos="fade-up" data-aos-delay="250">
+          <div class="spec-icon">
+            <i class="fas fa-info-circle"></i>
+          </div>
+          <div class="spec-details">
+            <div class="spec-label">Detail</div>
+            <div class="spec-value">{{ property.detail || 'Standalone retail stores' }}</div>
+          </div>
+          <div class="hover-accent"></div>
+        </div>
+        
+        <!-- Bedrooms -->
+        <div class="spec-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="spec-icon">
+            <i class="fas fa-bed"></i>
+          </div>
+          <div class="spec-details">
+            <div class="spec-label">Bedrooms</div>
+            <div class="spec-value">{{ property.bedrooms || '0' }}</div>
+          </div>
+          <div class="hover-accent"></div>
+        </div>
+        
+        <!-- Bathrooms -->
+        <div class="spec-card" data-aos="fade-up" data-aos-delay="350">
+          <div class="spec-icon">
+            <i class="fas fa-bath"></i>
+          </div>
+          <div class="spec-details">
+            <div class="spec-label">Bathrooms</div>
+            <div class="spec-value">{{ property.bathrooms || '1' }}</div>
+          </div>
+          <div class="hover-accent"></div>
+        </div>
+        
+        <!-- Property Size -->
+        <div class="spec-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="spec-icon">
+            <i class="fas fa-ruler-combined"></i>
+          </div>
+          <div class="spec-details">
+            <div class="spec-label">Property Size</div>
+            <div class="spec-value">{{ property.propertySize || '1500' }} sq ft</div>
+          </div>
+          <div class="hover-accent"></div>
+        </div>
+        
+        <!-- Year Built -->
+        <div class="spec-card" data-aos="fade-up" data-aos-delay="450">
+          <div class="spec-icon">
+            <i class="fas fa-calendar-alt"></i>
+          </div>
+          <div class="spec-details">
+            <div class="spec-label">Year Built</div>
+            <div class="spec-value">{{ property.yearBuilt || '2015' }}</div>
+          </div>
+          <div class="hover-accent"></div>
+        </div>
+        
+        <!-- Parking Spaces -->
+        <div class="spec-card" data-aos="fade-up" data-aos-delay="500">
+          <div class="spec-icon">
+            <i class="fas fa-car"></i>
+          </div>
+          <div class="spec-details">
+            <div class="spec-label">Parking Spaces</div>
+            <div class="spec-value">{{ property.parkingSpaces || '2' }}</div>
+          </div>
+          <div class="hover-accent"></div>
+        </div>
+        
+        <!-- Furnishing -->
+        <div class="spec-card" data-aos="fade-up" data-aos-delay="550">
+          <div class="spec-icon">
+            <i class="fas fa-couch"></i>
+          </div>
+          <div class="spec-details">
+            <div class="spec-label">Furnishing</div>
+            <div class="spec-value">{{ property.furnishing || 'Unfurnished' }}</div>
+          </div>
+          <div class="hover-accent"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Premium Agent Card Section -->
+<div class="premium-agent-card" data-aos="fade-up" data-aos-delay="100">
+  <div class="premium-card-backdrop">
+    <div class="backdrop-glow"></div>
+    <div class="backdrop-pattern"></div>
+  </div>
+  
+  <div class="agent-card-content">
+    <!-- Agent Profile Section -->
+    <div class="agent-profile">
+      <div class="agent-photo-container">
+        <div class="photo-frame">
+          <div class="photo-accent"></div>
+          <img [src]="property.agent['photo'] || 'assets/default-agent.jpg'" 
+               [alt]="property.agent['name'] || 'Agent Photo'"
+               class="agent-photo"
+               onerror="this.src='assets/user.png'">
+        </div>
+        <div class="status-indicator" [class.online]="true">
+          <span class="status-dot"></span>
+          <span class="status-text">Online</span>
+        </div>
+      </div>
+      
+      <div class="agent-identity">
+        <h3 class="agent-name">{{ property.agent['name'] || 'Unknown Agent' }}</h3>
+        <div class="agent-rating">
+          <div class="rating-stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+          </div>
+          <span class="rating-text">4.8 · 42 reviews</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Agent Contact Info -->
+    <div class="agent-contact-grid">
+      <a [href]="'tel:' + (property.agent['phone'] || '')" 
+         class="contact-method phone">
+        <div class="contact-icon">
+          <i class="fas fa-phone-alt"></i>
+        </div>
+        <div class="contact-detail">
+          <span class="contact-label">Phone</span>
+          <span class="contact-value">{{ property.agent['phone'] || '+254790751743' }}</span>
+        </div>
+        <div class="hover-indicator">
+          <i class="fas fa-arrow-right"></i>
+        </div>
+      </a>
+      
+      <a [href]="'mailto:' + (property.agent['email'] || '')" 
+         class="contact-method email">
+        <div class="contact-icon">
+          <i class="fas fa-envelope"></i>
+        </div>
+        <div class="contact-detail">
+          <span class="contact-label">Email</span>
+          <span class="contact-value">{{ property.agent['email'] || 'scijared84@gmail.com' }}</span>
+        </div>
+        <div class="hover-indicator">
+          <i class="fas fa-arrow-right"></i>
+        </div>
+      </a>
+    </div>
+  </div>
+  
+  <!-- Viewing CTA -->
+  <div class="premium-viewing-cta">
+    <button class="schedule-button" (click)="scheduleViewing()">
+      <div class="button-content">
+        <div class="button-icon">
+          <i class="fas fa-calendar-alt"></i>
+        </div>
+        <span>Schedule Viewing</span>
+      </div>
+      <div class="button-hover-effect"></div>
+    </button>
+  </div>
+</div>
+
+
+  </ng-container>
+</div>
+
+<!-- Recommended Properties with Modern Design -->
+<div class="recommended-section" *ngIf="recommendedProperties.length > 0" data-aos="fade-up" data-aos-delay="100">
+  <div class="section-header">
+    <h2>Recommended for you</h2>
+    <p class="text-muted">Based on your viewing history</p>
+  </div>
+  
+  <div class="recommended-grid">
+    <div *ngFor="let rec of recommendedProperties"
+         class="property-card"
+         (click)="goToProperty(rec.id)">
+      <div class="card-image">
+        <img [src]="rec.images[0] || 'assets/about2.jpg'"
+             [alt]="rec.title">
+        <div class="status-badge">
+          Available
+        </div>
+      </div>
+      <div class="card-content">
+        <div class="price">{{ rec.price | currency:'KSH' }}</div>
+        
+        <!-- Colorful Feature Icons -->
+        <div style="display: flex; align-items: center; gap: 8px; margin: 12px 0;">
+          <!-- Bedrooms -->
+          <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; width: 60px; height: 60px; border-radius: 50%; background-color: #8B5CF6; color: white; font-weight: 500;" *ngIf="rec.bedrooms !== undefined">
+            <i class="fas fa-bed" style="color: white; font-size: 14px; margin-bottom: 4px;"></i>
+            <span style="color: white; font-size: 14px;">{{ rec.bedrooms }}</span>
+          </div>
+          
+          <!-- Bathrooms -->
+          <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; width: 60px; height: 60px; border-radius: 50%; background-color: #22D3EE; color: white; font-weight: 500;" *ngIf="rec.bathrooms !== undefined">
+            <i class="fas fa-bath" style="color: white; font-size: 14px; margin-bottom: 4px;"></i>
+            <span style="color: white; font-size: 14px;">{{ rec.bathrooms }}</span>
+          </div>
+          
+          <!-- Size -->
+          <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; width: 60px; height: 60px; border-radius: 50%; background-color: #FB923C; color: white; font-weight: 500;">
+            <i class="fas fa-building" style="color: white; font-size: 14px; margin-bottom: 4px;"></i>
+            <span style="color: white; font-size: 14px;">{{ rec.propertySize }}</span>
+          </div>
+          <span style="display: inline-flex; align-items: center; font-size: 14px; font-weight: 500; color: #4b5563; margin-left: 4px;">sq ft</span>
+        </div>
+        
+        <!-- Location -->
+        <div style="display: flex; align-items: center; background-color: #F472B6; border-radius: 50px; padding: 8px 16px; margin-top: 8px; margin-bottom: 12px; width: fit-content;">
+          <i class="fas fa-map-marker-alt" style="color: white; margin-right: 8px;"></i>
+          <span style="color: white; font-size: 14px; font-weight: 500;">{{ rec.location }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

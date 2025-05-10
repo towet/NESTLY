@@ -1,0 +1,460 @@
+/* Container for the entire about page */
+.about-container {
+    font-family: "Inter", sans-serif;
+    background-color: #fff;
+    margin-top: 4rem;
+    
+  
+    header {
+      /* Same styling from your existing nav, consistent with home. */
+    }
+  }
+  
+  /* Example chart label if you overlay text on an image */
+  .chart-label {
+    font-weight: 600;
+    opacity: 0.9;
+  }
+  
+  /* Additional sections background classes used above */
+  .bg-indigo-50 {
+    background-color: #eef2ff;
+  }
+  
+  /* Utility for centering icons/images in stats highlights */
+  img.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .text-center {
+    text-align: center;
+  }
+  .leading-relaxed {
+    line-height: 1.625;
+  }
+  .bg-indigo-900 {
+    background-color: #1e1b4b; /* Adjust if needed */
+  }
+  
+  /* ------------------------------------ */
+  /* FOOTER STYLES - resembling your screenshot's dark theme */
+  /* ------------------------------------ */
+  
+  .about-footer {
+    background-color: #0f0e2e; /* A dark navy; or #1e1b4b to match if needed */
+    position: relative;
+    color: #fff;
+    font-size: 0.875rem; /* ~text-sm */
+  
+    .vertical-lbl {
+      width: 2rem;
+      text-align: right;
+      .rotate-vertical {
+        transform: rotate(-90deg);
+        transform-origin: left top;
+        display: inline-block;
+        white-space: nowrap;
+      }
+    }
+  
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      /* We already apply flex in HTML; if more spacing is needed, do so here. */
+    }
+  
+    .left-card {
+      background-color: rgba(255, 255, 255, 0.05); /* Slight highlight? */
+      border-radius: 0.5rem;
+    }
+  
+    .footer-logo img {
+      max-height: 2.5rem; /* Adjust the logo size */
+    }
+  
+    .right-links {
+      /* For the columns container on the right */
+      .space-y-2 > li {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+    }
+  
+    h4 {
+      font-size: 0.75rem; /* ~text-xs-sm */
+      letter-spacing: 0.05rem;
+    }
+  
+    a {
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  
+  /* Extra styling for responsiveness or finer details if needed */
+  @media (max-width: 768px) {
+    .vertical-lbl {
+      display: none;
+    }
+  }
+
+  .commitment-section {
+    position: relative;
+    /* Subtle gradient from white (#fff) to a very light shade (#f2f6fb). */
+    background: linear-gradient(to bottom, #ffffff, #f2f6fb);
+    padding: 4rem 2rem; /* top/bottom & left/right spacing */
+  
+    /* The large “NEW” watermark in the background */
+    .watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.8); // start scaled down
+      font-size: 12rem;
+      font-weight: 700;
+      color: rgba(0, 0, 0, 0.05);
+      pointer-events: none;
+      user-select: none;
+      z-index: 1;
+      white-space: nowrap;
+      opacity: 0.5; // start slightly faded
+      transition: transform 1s ease-out, opacity 1s ease-out;
+    }
+
+    .watermark.animate {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+  
+    /* Content wrapper sits above the watermark */
+    .content-wrapper {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px; /* or use Tailwind classes, e.g. max-w-7xl */
+      margin: 0 auto;
+      text-align: left;
+  
+      /* The “Who We Serve” pill label */
+      .pill {
+        display: inline-block;
+        background-color: #0ea5e9; /* Adjust color to match your brand */
+        color: #fff;
+        font-size: 0.875rem;  /* ~text-sm */
+        font-weight: 600;
+        padding: 0.5rem 1rem;
+        border-radius: 9999px; /* fully rounded */
+        margin-bottom: 1rem;
+      }
+  
+      /* Main heading: “Our Commitment.” */
+      .commitment-heading {
+        font-size: 2rem;    /* ~text-2xl or text-3xl */
+        font-weight: 700;
+        color: #1f2937;     /* ~text-gray-800 */
+        margin-bottom: 1rem;
+      }
+  
+      /* Paragraph text */
+      .commitment-text {
+        font-size: 1rem;    /* ~text-base */
+        line-height: 1.6;
+        color: #4b5563;     /* ~text-gray-700 */
+        max-width: 600px;
+        margin-bottom: 1.5rem;
+      }
+  
+      /* Link: “Industries We Serve >” */
+      .industries-link {
+        display: inline-block;
+        font-size: 0.875rem; /* ~text-sm */
+        font-weight: 500;
+        color: #2563eb;      /* ~text-blue-600 */
+        text-decoration: none;
+        margin-bottom: 2rem;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+  
+      /* Two-column row for the info blocks */
+      .icon-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin-top: 2rem;
+  
+        /* Each info block (icon + heading + paragraph) */
+        .icon-block {
+          position: relative;
+  
+          /* The circle icon at the top */
+          .icon-circle {
+            width: 3rem;
+            height: 3rem;
+            background-color: #0ea5e9; /* same brand color as pill */
+            color: #fff;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            i {
+              font-size: 1.25rem; /* ~text-xl */
+            }
+          }
+  
+          /* Sub-heading inside each block */
+          h3 {
+            font-size: 1.125rem;  /* ~text-lg */
+            font-weight: 600;
+            color: #1f2937;       /* ~text-gray-800 */
+            margin-bottom: 0.5rem;
+          }
+  
+          /* Paragraph text inside each block */
+          p {
+            font-size: 0.875rem;  /* ~text-sm */
+            color: #4b5563;       /* ~text-gray-700 */
+            line-height: 1.5;
+          }
+        }
+      }
+    }
+  }
+
+  .scroll-to-top {
+    position: fixed;
+    bottom: 1rem;       /* Adjust the distance from the bottom */
+    right: 1rem;        /* Adjust the distance from the right */
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    z-index: 9999;      /* Ensure it stays on top of other elements */
+  
+    .progress-circle {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      transition: background 0.25s linear; /* Smooth fill transitions */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  
+      /* This background is set dynamically from TS via the conicGradientValue */
+    }
+  
+    .arrow-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #000; /* Inner circle for contrast */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;            /* White arrow icon */
+      font-size: 1.5rem;      /* Larger icon for better visibility */
+      transition: transform 0.3s ease;
+    }
+  
+    /* Optional: on hover, gently scale the arrow for emphasis */
+    &:hover .arrow-circle {
+      transform: scale(1.1);
+    }
+  }
+
+/* Bounce Animation */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px); 
+  }
+}
+
+/* Bounce Wrapper: continuously bounces */
+.bounce-wrapper {
+  animation: bounce 2s infinite ease-in-out;
+}
+
+/* Tilt Image */
+.tilt-image {
+  transition: transform 0.2s ease-out;
+  will-change: transform;
+}
+
+
+/* Animated dots background */
+.animated-dots {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* Change from -2 to 0 so it shows behind other content */
+  pointer-events: none;
+  overflow: hidden;
+}
+
+
+/* Keyframes to move dots from left to right */
+@keyframes moveDots {
+  0% {
+    transform: translateX(-10vw);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(120vw);
+    opacity: 0;
+  }
+}
+
+/* Base styling for each dot */
+.dot {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+  animation: moveDots linear infinite;
+}
+
+/* Dot variations using nth-child selectors */
+.dot:nth-child(1) {
+  width: 10px;
+  height: 10px;
+  top: 15%;
+  left: -10px;
+  background-color: #ff4d4f; /* red */
+  animation-duration: 12s;
+  animation-delay: 0s;
+}
+.dot:nth-child(2) {
+  width: 15px;
+  height: 15px;
+  top: 35%;
+  left: -15px;
+  background-color: #1890ff; /* blue */
+  animation-duration: 10s;
+  animation-delay: 2s;
+}
+.dot:nth-child(3) {
+  width: 12px;
+  height: 12px;
+  top: 50%;
+  left: -12px;
+  background-color: #52c41a; /* green */
+  animation-duration: 12s;
+  animation-delay: 1s;
+}
+.dot:nth-child(4) {
+  width: 8px;
+  height: 8px;
+  top: 70%;
+  left: -8px;
+  background-color: #faad14; /* orange/yellow */
+  animation-duration: 13s;
+  animation-delay: 0.5s;
+}
+.dot:nth-child(5) {
+  width: 14px;
+  height: 14px;
+  top: 25%;
+  left: -14px;
+  background-color: #722ed1; /* purple */
+  animation-duration: 11s;
+  animation-delay: 1.5s;
+}
+.dot:nth-child(6) {
+  width: 10px;
+  height: 10px;
+  top: 60%;
+  left: -10px;
+  background-color: #ff4d4f; /* red */
+  animation-duration: 11.5s;
+  animation-delay: 0.8s;
+}
+.dot:nth-child(7) {
+  width: 16px;
+  height: 16px;
+  top: 45%;
+  left: -16px;
+  background-color: #1890ff; /* blue */
+  animation-duration: 12.5s;
+  animation-delay: 1.2s;
+}
+.dot:nth-child(8) {
+  width: 9px;
+  height: 9px;
+  top: 80%;
+  left: -9px;
+  background-color: #52c41a; /* green */
+  animation-duration: 14.5s;
+  animation-delay: 2.2s;
+}
+.dot:nth-child(9) {
+  width: 11px;
+  height: 11px;
+  top: 30%;
+  left: -11px;
+  background-color: #faad14; /* orange/yellow */
+  animation-duration: 13.2s;
+  animation-delay: 1.8s;
+}
+.dot:nth-child(10) {
+  width: 13px;
+  height: 13px;
+  top: 55%;
+  left: -13px;
+  background-color: #722ed1; /* purple */
+  animation-duration: 10.7s;
+  animation-delay: 2.5s;
+}
+
+.cta-section {
+  background-color: #0f0e2e; /* Dark navy or your desired color */
+  color: #fff;              /* White text */
+  text-align: center;
+  /* Start off slightly down and transparent */
+  transform: translateY(50px);
+  opacity: 0;
+  /* Transition for smooth pop-in */
+  transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+  margin-bottom: 2rem;
+
+  /* When in view, apply the “visible” class */
+  &.visible {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .cta-inner {
+    /* Additional spacing or styling if needed */
+  }
+  .cta-heading {
+    /* For your H2 heading styling */
+  }
+  .cta-text {
+    /* For your paragraph styling */
+  }
+  .cta-button {
+    /* For your button styling */
+    background-color: #fff;
+    color: #0f0e2e;
+    &:hover {
+      background-color: #e2e2e2;
+    }
+  }
+}
+
+
+  
+  
+  
+  

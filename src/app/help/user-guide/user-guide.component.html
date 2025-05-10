@@ -1,0 +1,41 @@
+<div class="about-container min-h-screen flex flex-col" style="margin-top: 30px;">
+    <div class="animated-dots">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  
+    <!-- HEADER (reuse nav) -->
+    <app-header></app-header>
+  
+    <main class="flex-1 w-full bg-white">
+      <div class="max-w-7xl mx-auto px-4 py-8 md:py-12">
+        <h1 class="text-3xl md:text-4xl font-extrabold text-indigo-900 mb-6">User Guide</h1>
+        <p class="text-gray-700 leading-relaxed mb-6">
+          Follow these steps to make the most out of our platform. Whether you're listing a new property or searching for your dream home, we've got you covered!
+        </p>
+  
+        <ol class="list-decimal list-inside space-y-4">
+          <li *ngFor="let step of steps">
+            <h2 class="text-indigo-800 font-semibold text-lg mb-1">
+              {{ step.title }}
+            </h2>
+            <p class="text-gray-700 text-sm">
+              {{ step.detail }}
+            </p>
+          </li>
+        </ol>
+      </div>
+    </main>
+  
+    <!-- FOOTER -->
+    <app-footer></app-footer>
+  </div>
+  

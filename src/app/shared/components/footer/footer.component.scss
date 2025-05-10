@@ -1,0 +1,64 @@
+/* Modern footer styling with gradient background */
+footer {
+  position: relative;
+  overflow: hidden;
+
+  /* Animated gradient transition on hover */
+  &:hover .absolute {
+    transform: translateY(-5px);
+    transition: transform 1.5s ease-in-out;
+  }
+
+  /* Blur effect for decorative elements */
+  .blur-3xl {
+    filter: blur(60px);
+    transition: all 2s ease;
+  }
+
+  /* Links styling with smooth transitions */
+  a {
+    transition: color 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+
+    &:hover {
+      transform: translateX(2px);
+    }
+  }
+
+  /* Social icons with pulse effect */
+  .fab {
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      animation: pulse 1s infinite;
+    }
+  }
+
+  /* App download buttons hover effect */
+  img {
+    transition: transform 0.3s ease;
+  }
+
+  /* Transparent text effect for logo */
+  .bg-clip-text {
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+}
+
+/* Animation for social icons */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

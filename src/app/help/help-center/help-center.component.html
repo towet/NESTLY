@@ -1,0 +1,106 @@
+<div class="min-h-screen flex flex-col">
+    <!-- Header -->
+    <app-header></app-header>
+
+<div class="help-center-container flex-1">
+    <!-- Header Section -->
+    <header class="help-header">
+      <div class="header-content">
+        <h1 class="main-title">Help Center</h1>
+        <p class="subtitle">Find answers and support for all your questions</p>
+  
+        <!-- Search Bar -->
+        <form (submit)="onSearch($event)" class="search-form">
+          <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text"
+                   [(ngModel)]="searchQuery"
+                   name="search"
+                   placeholder="Search for help articles..."
+                   class="search-input">
+            <button type="submit" 
+                    [disabled]="!searchQuery.trim()"
+                    class="search-button">
+              Search
+            </button>
+          </div>
+        </form>
+      </div>
+    </header>
+  
+    <!-- Quick Links -->
+    <section class="quick-links">
+      <div class="links-content">
+        <div *ngFor="let link of quickLinks" 
+             [routerLink]="link.route"
+             class="quick-link-card">
+          <i [class]="link.icon"></i>
+          <h3>{{link.title}}</h3>
+          <p>{{link.description}}</p>
+        </div>
+      </div>
+    </section>
+  
+    <!-- Main Content -->
+    <div class="content-wrapper">
+      <!-- Help Categories -->
+      <section class="help-categories">
+        <h2 class="section-title">Browse Help Topics</h2>
+        <div class="categories-grid">
+          <a *ngFor="let category of helpCategories"
+             [routerLink]="getCategoryUrl(category.id)"
+             class="category-card">
+            <div class="category-icon">
+              <i [class]="category.icon"></i>
+            </div>
+            <div class="category-content">
+              <h3>{{category.title}}</h3>
+              <p>{{category.description}}</p>
+              <span class="article-count">
+                {{category.articles}} articles
+              </span>
+            </div>
+          </a>
+        </div>
+      </section>
+  
+      <!-- Popular Articles -->
+      <section class="popular-articles">
+        <h2 class="section-title">Popular Articles</h2>
+        <div class="articles-list">
+          <a *ngFor="let article of popularArticles"
+             [routerLink]="getArticleUrl(article.id)"
+             class="article-item">
+            <div class="article-info">
+              <h3>{{article.title}}</h3>
+              <span class="category-tag">{{article.category}}</span>
+            </div>
+            <div class="article-stats">
+              <span class="views">
+                <i class="fas fa-eye"></i>
+                {{formatViews(article.views)}} views
+              </span>
+              <i class="fas fa-chevron-right"></i>
+            </div>
+          </a>
+        </div>
+      </section>
+  
+      <!-- Contact Support -->
+      <section class="contact-support">
+        <div class="support-content">
+          <div class="support-text">
+            <h2>Still Need Help?</h2>
+            <p>Our support team is here to assist you with any questions or concerns.</p>
+          </div>
+          <button routerLink="/help/contact-support" 
+                  class="contact-button">
+            Contact Support
+          </button>
+        </div>
+      </section>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>
+  

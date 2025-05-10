@@ -1,0 +1,224 @@
+<div class="contact-container min-h-screen flex flex-col">
+  <!-- TOP NAV (consistent with your Home & About pages) -->
+  <header class="bg-white w-full h-16 flex items-center justify-between px-6 shadow-sm">
+    <!-- Left brand/logo -->
+    <div class="flex items-center space-x-2">
+      <div class="text-xl font-extrabold text-indigo-900 tracking-wide logo-text">
+        NESTIFY
+      </div>
+    </div>
+    <!-- Center/Right nav items -->
+    <nav class="flex items-center space-x-6">
+      <a routerLink="/" class="text-sm font-medium text-indigo-900 hover:text-indigo-600 transition-colors">
+        Home
+      </a>
+      <a routerLink="/about" class="text-sm font-medium text-indigo-900 hover:text-indigo-600 transition-colors">
+        About Us
+      </a>
+      <a href="#" class="text-sm font-medium text-indigo-900 hover:text-indigo-600 transition-colors">
+        Services
+      </a>
+      <a href="#" class="text-sm font-medium text-indigo-900 hover:text-indigo-600 transition-colors">
+        IoT
+      </a>
+      <a href="#" class="text-sm font-medium text-indigo-900 hover:text-indigo-600 transition-colors">
+        Solutions
+      </a>
+    </nav>
+    <!-- “Contact Us” button (for consistency, although we are on Contact Us page) -->
+    <button
+      class="bg-indigo-800 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors text-sm font-medium focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2">
+      Contact Us
+    </button>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="flex-1 w-full bg-white relative">
+   
+    <!-- Hero Section: Left text and right form -->
+    <section class="max-w-7xl mx-auto px-4 py-8 md:py-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- LEFT HERO TEXT -->
+      <div class="flex flex-col justify-center">
+        <h1 class="text-5xl md:text-6xl font-bold text-gray-900 leading-tight mb-3">
+          Send a <br class="hidden md:block" />
+          <span class="italic">message.</span>
+        </h1>
+        <p class="text-gray-500 mb-6">We’re here to answer any questions you may have.</p>
+        <!-- Additional info block -->
+        <div class="mt-4">
+          <h4 class="text-sm font-semibold text-gray-700 mb-1">Feedbacks</h4>
+          <p class="text-gray-600 text-sm mb-2">
+            Need consultation or a partner in a project? Send a message.
+          </p>
+          <p class="text-gray-800 font-bold">info@nestify.co.ke</p>
+        </div>
+      </div>
+
+      <!-- RIGHT FORM -->
+      <div class="form-side flex flex-col justify-center">
+        <form class="grid grid-cols-2 gap-6" (submit)="onSubmit($event)">
+          <!-- Name -->
+          <div class="col-span-1">
+            <label for="name" class="block text-sm font-semibold text-gray-700 mb-1">
+              What’s your name?
+            </label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              required
+              placeholder="John Doe"
+              class="block w-full border-b border-gray-300 p-2 focus:outline-none focus:border-indigo-500" />
+          </div>
+          <!-- Email -->
+          <div class="col-span-1">
+            <label for="email" class="block text-sm font-semibold text-gray-700 mb-1">
+              Email address
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              placeholder="your@example.com"
+              class="block w-full border-b border-gray-300 p-2 focus:outline-none focus:border-indigo-500" />
+          </div>
+          <!-- Topic -->
+          <div class="col-span-1">
+            <label for="topic" class="block text-sm font-semibold text-gray-700 mb-1">
+              Select a Discussion Topic
+            </label>
+            <select
+              id="topic"
+              name="topic"
+              required
+              class="block w-full border-b border-gray-300 p-2 focus:outline-none focus:border-indigo-500">
+              <option value="">-- Please choose an option --</option>
+              <option value="rent">Rent</option>
+              <option value="buy">Buy</option>
+              <option value="sell">Sell</option>
+              <option value="mortgage">Mortgage Info</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <!-- Budget -->
+          <div class="col-span-1">
+            <label for="budget" class="block text-sm font-semibold text-gray-700 mb-1">
+              What’s your budget?
+            </label>
+            <input
+              id="budget"
+              name="budget"
+              type="text"
+              required
+              placeholder="Approx. figure"
+              class="block w-full border-b border-gray-300 p-2 focus:outline-none focus:border-indigo-500" />
+          </div>
+          <!-- Description (full width) -->
+          <div class="col-span-2">
+            <label for="description" class="block text-sm font-semibold text-gray-700 mb-1">
+              A brief description about your project/request/consultation
+            </label>
+            <textarea
+              id="description"
+              name="description"
+              rows="3"
+              required
+              placeholder="Tell us more about what you’re looking for..."
+              class="block w-full border-b border-gray-300 p-2 focus:outline-none focus:border-indigo-500"></textarea>
+          </div>
+          <!-- Terms / Privacy Check + Submit -->
+          <div class="col-span-2 flex items-center justify-between mt-4">
+            <div class="flex items-center space-x-2">
+              <input
+                id="privacy"
+                type="checkbox"
+                required
+                class="w-4 h-4 border-gray-300 focus:ring-indigo-500" />
+              <label for="privacy" class="text-sm text-gray-700 cursor-pointer">
+                I am bound by the terms of the Service | accept <a href="#" class="text-indigo-600 hover:underline">Privacy Policy</a>
+              </label>
+            </div>
+            <button
+              type="submit"
+              class="bg-indigo-900 text-white px-6 py-2 rounded-md hover:bg-indigo-700 transition-colors text-sm font-medium focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2">
+              — send message
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER (adapted to Nestify style) -->
+  <footer class="about-footer relative text-white">
+    <!-- Vertical label on left (like “Get Zidi POS for Free”), you can adapt the text -->
+    <div class="vertical-lbl hidden md:block absolute top-1/2 -left-12 transform -translate-y-1/2 text-xs font-bold tracking-wider">
+      <div class="rotate-vertical">Get Nestify App for Free</div>
+    </div>
+
+    <div class="footer-inner max-w-7xl mx-auto px-4 py-10 md:py-12 flex flex-col md:flex-row">
+      <!-- Left big block -->
+      <div class="left-card bg-opacity-20 md:w-1/2 p-6 rounded-lg flex flex-col justify-center mb-6 md:mb-0">
+        <div class="footer-logo mb-4">
+          <img src="assets/nest.jpg" alt="Nestify Logo" class="h-10" />
+        </div>
+        <h3 class="text-2xl font-bold mb-2">
+          Automating your real estate experiences.
+        </h3>
+        <p class="opacity-90 leading-relaxed mb-4">
+          With Nestify, managing properties, searching listings, and streamlining
+          transactions has never been easier. Join us in shaping the future of real estate.
+        </p>
+      </div>
+
+      <!-- Right columns (Company, Services, Solutions, etc.) -->
+      <div class="right-links flex-1 grid grid-cols-2 md:grid-cols-4 gap-6">
+        <!-- Column 1: Company -->
+        <div>
+          <h4 class="text-sm font-semibold mb-3 opacity-80 uppercase tracking-wider">Company</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a routerLink="/about" class="hover:underline">About Us</a></li>
+            <li><a href="#" class="hover:underline">Agents</a></li>
+            <li><a href="#" class="hover:underline">Careers</a></li>
+            <li><a href="#" class="hover:underline">Blog</a></li>
+            <li><a href="#" class="hover:underline">Contact Us</a></li>
+          </ul>
+        </div>
+        <!-- Column 2: Listings -->
+        <div>
+          <h4 class="text-sm font-semibold mb-3 opacity-80 uppercase tracking-wider">Listings</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="hover:underline">Rent</a></li>
+            <li><a href="#" class="hover:underline">Buy</a></li>
+            <li><a href="#" class="hover:underline">Sell</a></li>
+            <li><a href="#" class="hover:underline">Mortgage</a></li>
+            <li><a href="#" class="hover:underline">Land & Plots</a></li>
+          </ul>
+        </div>
+        <!-- Column 3: Solutions -->
+        <div>
+          <h4 class="text-sm font-semibold mb-3 opacity-80 uppercase tracking-wider">Solutions</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="hover:underline">Property Management</a></li>
+            <li><a href="#" class="hover:underline">Zidi POS</a></li>
+            <li><a href="#" class="hover:underline">CRM Integration</a></li>
+            <li><a href="#" class="hover:underline">LMS Tools</a></li>
+            <li><a href="#" class="hover:underline">AI Valuation</a></li>
+          </ul>
+        </div>
+        <!-- Column 4: Support -->
+        <div>
+          <h4 class="text-sm font-semibold mb-3 opacity-80 uppercase tracking-wider">Support</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="hover:underline">FAQs</a></li>
+            <li><a href="#" class="hover:underline">Privacy Policy</a></li>
+            <li><a href="#" class="hover:underline">Terms & Conditions</a></li>
+            <li><a href="#" class="hover:underline">Send an Email</a></li>
+            <li><a href="#" class="hover:underline">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>

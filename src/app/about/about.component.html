@@ -1,0 +1,240 @@
+<app-header></app-header>
+
+<div class="about-container min-h-screen flex flex-col">
+
+  <div class="animated-dots">
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>//
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+
+    
+    
+
+  
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 w-full bg-white">
+      <!-- Hero/Intro Section -->
+      <div class="max-w-7xl mx-auto px-4 py-8 md:py-12 flex flex-col md:flex-row items-start relative">
+        <!-- LEFT TEXT SECTION -->
+        <div class="w-full md:w-1/2 pr-6 mb-8 md:mb-0">
+          <!-- Sub-heading / tagline -->
+          <div class="uppercase text-xs md:text-sm font-bold text-gray-600 tracking-wider mb-2">
+            YOUR PROJECT’S SUCCESS, <span class="text-indigo-700">OUR MISSION.</span>
+          </div>
+          <!-- Main heading -->
+          <h1 class="text-3xl md:text-5xl font-extrabold text-indigo-900 leading-tight mb-4">
+            About Nestify: <br class="hidden md:block" />
+            Empowering Property Search
+          </h1>
+          <!-- Paragraph -->
+          <p class="text-gray-700 text-base md:text-lg leading-relaxed mb-6">
+            Welcome to Nestify, where real estate dreams become reality. We specialize
+            in delivering a seamless property experience—whether you're searching for your
+            next home, listing a property, or simply exploring investment options. Our passion
+            is to connect you with the right listings, every single time.
+          </p>
+  
+          <!-- A CTA or small highlight -->
+          <div class="bg-indigo-50 border-l-4 border-indigo-400 p-4 text-sm text-indigo-900 rounded shadow-sm">
+            <strong>Our Core Values:</strong> Trust, Integrity, and Transparent Service.
+            <br />
+            We strive to make your real estate journey simple, informative, and fulfilling.
+          </div>
+        </div>
+  
+        <!-- RIGHT IMAGE/ILLUSTRATION SECTION -->
+        <div class="w-full md:w-1/2 flex items-center justify-center relative mt-4 md:mt-0"
+        (mousemove)="onImageMouseMove($event)"
+        (mouseleave)="onImageMouseLeave()"
+        #tiltContainer>
+     <div class="bounce-wrapper">
+       <img
+         #tiltImage
+         src="assets/about1.jpg"
+         alt="People collaborating next to a bar chart"
+         class="object-cover w-full max-w-md rounded shadow tilt-image"
+       />
+     </div>
+     <!-- Overlaid label -->
+     <div class="chart-label absolute top-0 right-0 bg-indigo-900 text-white px-2 py-1 text-xs rounded-bl">
+       Growing Together
+     </div>
+   </div>
+      </div>
+  
+      <!-- Secondary Section: “Who We Are / Our Approach” -->
+      <div class="bg-gray-50 py-10">
+        <div class="max-w-7xl mx-auto px-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <!-- LEFT: an illustration or second image -->
+            <div class="flex justify-center">
+              <img
+                src="assets/about2.jpg"
+                alt="Team discussion"
+                class="object-cover w-full max-w-sm rounded-lg shadow"
+              />
+            </div>
+            <!-- RIGHT: text content -->
+            <div>
+              <h2 class="text-2xl md:text-3xl font-bold text-indigo-900 mb-4">
+                Who We Are
+              </h2>
+              <p class="text-gray-700 mb-4 leading-relaxed">
+                Nestify was founded on the principle that finding the perfect property
+                should be an enjoyable journey, not a daunting task. We believe in the
+                power of technology, personalization, and human expertise working together
+                to deliver an unparalleled real estate experience.
+              </p>
+              <p class="text-gray-700 leading-relaxed">
+                Our team consists of seasoned professionals—including real estate agents,
+                data analysts, and tech innovators—committed to serving you with integrity
+                and efficiency.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Tertiary Section: “What Sets Us Apart / Stats or Key Highlights” -->
+      <div class="bg-white py-10">
+        <div class="max-w-7xl mx-auto px-4">
+          <!-- Heading -->
+          <h2 class="text-2xl md:text-3xl font-extrabold text-indigo-900 mb-6 text-center">
+            What Sets Us Apart
+          </h2>
+          <!-- A row of highlights or stats -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div class="p-4">
+              <img src="assets/about3.jpg" alt="Stat1 Icon" class="mx-auto mb-4 h-12" />
+              <h3 class="text-xl font-bold text-indigo-800 mb-2">Over 10k Listings</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                From bustling city apartments to serene countryside retreats.
+              </p>
+            </div>
+            <div class="p-4">
+              <img src="assets/page1_icon.png" alt="Stat2 Icon" class="mx-auto mb-4 h-12" />
+              <h3 class="text-xl font-bold text-indigo-800 mb-2">Expert Agents</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                Partner with our friendly, knowledgeable agents who guide you every step.
+              </p>
+            </div>
+            <div class="p-4">
+              <img src="assets/page2_icon.png" alt="Stat3 Icon" class="mx-auto mb-4 h-12" />
+              <h3 class="text-xl font-bold text-indigo-800 mb-2">Advanced Search Tools</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                Filter by location, budget, amenities, and more to find your perfect match.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="commitment-section">
+        <!-- Watermark in the background -->
+        <div #watermark class="watermark">NESTIFY</div>
+      
+        <!-- Main content wrapper -->
+        <div class="content-wrapper">
+          
+          <!-- Pill label -->
+          <div class="pill">Who We Serve</div>
+      
+          <!-- Main heading -->
+          <h2 class="commitment-heading">Our Commitment.</h2>
+      
+          <!-- Introductory paragraph -->
+          <p class="commitment-text">
+            We are dedicated to delivering exceptional real estate experiences—whether you’re buying,
+            selling, or investing. Our passion is helping you find the perfect property solution.
+          </p>
+      
+          <!-- Link (e.g. to “Industries We Serve”) -->
+          <a href="#" class="industries-link">Industries We Serve &gt;</a>
+      
+          <!-- Two-column row of info blocks -->
+          <div class="icon-row">
+            <!-- Block #1 -->
+            <div class="icon-block">
+              <div class="icon-circle">
+                <i class="fas fa-building"></i>
+              </div>
+              <h3>Homeowners and Sellers</h3>
+              <p>
+                We help you prepare and list your property with strategic marketing, 
+                professional guidance, and personalized services to achieve the best outcome.
+              </p>
+            </div>
+      
+            <!-- Block #2 -->
+            <div class="icon-block">
+              <div class="icon-circle">
+                <i class="fas fa-rocket"></i>
+              </div>
+              <h3>Buyers and Investors</h3>
+              <p>
+                From first-time buyers to seasoned investors, we provide expert support
+                to discover properties that suit your vision and maximize your returns.
+              </p>
+            </div>
+          </div>
+          
+        </div>
+      </section>
+      
+      
+  
+      <!-- Additional Section: “Our Mission / Our Vision” or “Our Story” -->
+      <div class="bg-indigo-50 py-10">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center">
+          <!-- Left text block -->
+          <div class="md:w-1/2 md:pr-6 mb-6 md:mb-0">
+            <h2 class="text-2xl md:text-3xl font-bold text-indigo-900 mb-4">
+              Our Mission
+            </h2>
+            <p class="text-gray-700 mb-4 leading-relaxed">
+              Our mission is to make property search and management simpler,
+              more transparent, and truly rewarding. Whether it’s buying a forever home
+              or leasing out a vacation spot, we aim to be the trusted platform you’ll
+              return to again and again.
+            </p>
+            <h3 class="text-xl font-semibold text-indigo-800 mt-6 mb-2">
+              Our Vision
+            </h3>
+            <p class="text-gray-700 leading-relaxed">
+              A future where technology bridges real estate gaps seamlessly—making
+              properties accessible, interactions simpler, and experiences richer.
+            </p>
+          </div>
+          <!-- Right image/graphic -->
+          <div class="md:w-1/2">
+            <img
+              src="assets/unsplash.jpg"
+              alt="Mission and Vision"
+              class="object-cover w-full rounded-lg shadow"
+            />
+          </div>
+        </div>
+      </div>
+  
+      <!-- CTA or final note -->
+<!-- Removing CTA section as requested -->
+    </main>
+
+<!-- Floating scroll-to-top button -->
+<div class="scroll-to-top" (click)="scrollToTop()">
+  <div class="progress-circle" [style.background]="conicGradientValue">
+    <div class="arrow-circle">
+      <i class="fas fa-arrow-up"></i>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

@@ -1,0 +1,52 @@
+<div class="modal-header">
+    <h4 class="modal-title">Schedule Property Viewing</h4>
+    <button type="button" class="close-btn" (click)="close()">
+        <i class="fas fa-times"></i>
+    </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="scheduleForm">
+        <div class="mb-3">
+            <label for="visitorName" class="form-label">Your Name</label>
+            <input type="text" 
+                   class="form-control" 
+                   id="visitorName" 
+                   formControlName="visitorName"
+                   [class.is-invalid]="isFieldInvalid('visitorName')">
+            <div class="invalid-feedback" *ngIf="isFieldInvalid('visitorName')">
+                {{ getErrorMessage('visitorName') }}
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="visitorPhone" class="form-label">Phone Number</label>
+            <input type="tel" 
+                   class="form-control" 
+                   id="visitorPhone" 
+                   formControlName="visitorPhone"
+                   [class.is-invalid]="isFieldInvalid('visitorPhone')">
+            <div class="invalid-feedback" *ngIf="isFieldInvalid('visitorPhone')">
+                {{ getErrorMessage('visitorPhone') }}
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="scheduledDateTime" class="form-label">Preferred Date & Time</label>
+            <input type="datetime-local" 
+                   class="form-control" 
+                   id="scheduledDateTime" 
+                   formControlName="scheduledDateTime"
+                   [class.is-invalid]="isFieldInvalid('scheduledDateTime')">
+            <div class="invalid-feedback" *ngIf="isFieldInvalid('scheduledDateTime')">
+                {{ getErrorMessage('scheduledDateTime') }}
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="close()">Cancel</button>
+    <button type="button" 
+            class="btn btn-primary" 
+            (click)="submitForm()" 
+            [disabled]="!scheduleForm.valid">
+        Schedule Viewing
+    </button>
+</div>

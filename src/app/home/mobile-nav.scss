@@ -1,0 +1,154 @@
+/* Modern Mobile Bottom Navigation Styling */
+.mobile-icon-circle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+  
+  /* Add subtle shimmer effect */
+  &::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      to bottom right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(30deg);
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.6s;
+  }
+  
+  /* Icon styling */
+  i {
+    font-size: 16px;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
+    transition: all 0.3s ease;
+  }
+  
+  /* Active link styles */
+  a.active & {
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Hover effects */
+  a:hover & {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    
+    &::after {
+      opacity: 1;
+      transform: rotate(30deg) translateY(-30px);
+    }
+    
+    i {
+      transform: scale(1.1);
+    }
+  }
+  
+  /* Active press effect */
+  a:active & {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: all 0.1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+/* Colored text styling for each nav item */
+.mobile-nav-text {
+  color: #64748b; /* Default color */
+  transition: all 0.3s ease;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -3px;
+    height: 2px;
+    border-radius: 1px;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+  
+  /* Hover and active effects */
+  a:hover &, a.active & {
+    &::after {
+      transform: scaleX(0.7);
+    }
+  }
+}
+
+/* Colors for each nav item */
+.home-text {
+  a:hover &, a.active & {
+    color: #4f46e5;
+    
+    &::after {
+      background: linear-gradient(90deg, #4f46e5, #60a5fa);
+    }
+  }
+}
+
+.buy-text {
+  a:hover &, a.active & {
+    color: #8b5cf6;
+    
+    &::after {
+      background: linear-gradient(90deg, #8b5cf6, #6366f1);
+    }
+  }
+}
+
+.rent-text {
+  a:hover &, a.active & {
+    color: #f59e0b;
+    
+    &::after {
+      background: linear-gradient(90deg, #f59e0b, #ea580c);
+    }
+  }
+}
+
+.stay-text {
+  a:hover &, a.active & {
+    color: #10b981;
+    
+    &::after {
+      background: linear-gradient(90deg, #10b981, #047857);
+    }
+  }
+}
+
+.contact-text {
+  a:hover &, a.active & {
+    color: #0ea5e9;
+    
+    &::after {
+      background: linear-gradient(90deg, #0ea5e9, #2563eb);
+    }
+  }
+}
+
+/* Mobile bottom nav container */
+.fixed.bottom-0 {
+  border-top: 1px solid rgba(229, 231, 235, 0.8);
+  box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.07);
+  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.95);
+}

@@ -1,0 +1,272 @@
+/* Global Utilities */
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.border {
+  border: 1px solid #e2e8f0;
+}
+
+.hover\:underline:hover {
+  text-decoration: underline;
+}
+
+/* Layout container styles */
+.main-container,
+.contact-container {
+  font-family: "Inter", sans-serif;
+}
+
+/* Top Navigation Styles (reuse from Home/About) */
+header {
+  background-color: #fff;
+  width: 100%;
+  height: 4rem; // 64px approx.
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  .logo-text {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #312e81;
+    letter-spacing: 0.025rem;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+
+    a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #312e81;
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: #4f46e5;
+      }
+    }
+  }
+
+  button {
+    background-color: #4338ca;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: #4f46e5;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.5);
+    }
+  }
+}
+
+/* Brown left pane styling for hero */
+.brown-pane {
+  background-color: #4b4039;
+  width: 100%;
+  padding: 2rem;
+  h1 {
+    color: #fff;
+  }
+}
+
+/* Tabs and search box styles for hero */
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tab-btn {
+  background-color: #d9cdb7;
+  color: #333;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  &.active {
+    background-color: #fff;
+  }
+  &:hover {
+    background-color: #ccc1ab;
+  }
+}
+
+.search-box {
+  .search-input {
+    border: 1px solid #ccc;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.25rem;
+    width: 16rem;
+  }
+}
+
+.search-button {
+  background-color: #d91600;
+  color: #fff;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.875rem;
+  transition: background 0.2s;
+  &:hover {
+    background-color: #b61500;
+  }
+}
+
+/* Contact Us Page Specific Styles */
+.contact-container {
+  background-color: #fff;
+  position: relative;
+}
+
+/* Vertical label (for MD+ screens) */
+.vertical-lbl {
+  width: 2rem;
+  text-align: right;
+  .rotate-vertical {
+    transform: rotate(-90deg);
+    transform-origin: left top;
+    display: inline-block;
+  }
+}
+
+/* Form and hero section */
+.form-side form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.form-side input,
+.form-side select,
+.form-side textarea {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  padding: 0.5rem;
+  outline: none;
+  transition: border-color 0.2s;
+  &:focus {
+    border-color: #4f46e5;
+  }
+}
+
+/* Footer styles */
+.about-footer {
+  background-color: #0f0e2e; /* A dark navy; or #1e1b4b to match if needed */
+  position: relative;
+  color: #fff;
+  font-size: 0.875rem; /* ~text-sm */
+
+  .vertical-lbl {
+    width: 2rem;
+    text-align: right;
+    .rotate-vertical {
+      transform: rotate(-90deg);
+      transform-origin: left top;
+      display: inline-block;
+      white-space: nowrap;
+    }
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-direction: column;
+    /* We already apply flex in HTML; if more spacing is needed, do so here. */
+  }
+
+  .left-card {
+    background-color: rgba(255, 255, 255, 0.05); /* Slight highlight? */
+    border-radius: 0.5rem;
+  }
+
+  .footer-logo img {
+    max-height: 2.5rem; /* Adjust the logo size */
+  }
+
+  .right-links {
+    /* For the columns container on the right */
+    .space-y-2 > li {
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  h4 {
+    font-size: 0.75rem; /* ~text-xs-sm */
+    letter-spacing: 0.05rem;
+  }
+
+  a {
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+/* Bottom navigation (pills) */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+  z-index: 10;
+  .pill-container {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 0.5rem 1.5rem;
+    background-color: #fff;
+    border-radius: 9999px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    .nav-link {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #1f2937;
+      text-decoration: none;
+      transition: color 0.2s;
+      &:hover {
+        color: #4338ca;
+      }
+    }
+    .blog-pill {
+      background-color: #1b144f;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      transition: background-color 0.2s;
+      &:hover {
+        background-color: #4f46e5;
+      }
+    }
+  }
+}
+
+/* Extra spacing for bottom nav */
+.pb-20 {
+  padding-bottom: 5rem;
+}

@@ -1,0 +1,154 @@
+<div class="availability-checker">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <!-- Dates Section -->
+      <div class="form-section" formGroupName="dates">
+        <h3>Dates</h3>
+        <div class="dates-input">
+          <div class="input-group">
+            <label for="startDate">Check-in</label>
+            <input type="date" 
+                   id="startDate" 
+                   formControlName="startDate">
+          </div>
+          <div class="input-group">
+            <label for="endDate">Check-out</label>
+            <input type="date" 
+                   id="endDate" 
+                   formControlName="endDate">
+          </div>
+        </div>
+      </div>
+  
+      <!-- Guests Section -->
+      <div class="form-section" formGroupName="guests">
+        <h3>Guests</h3>
+        
+        <!-- Adults -->
+        <div class="guest-input">
+          <div class="guest-type">
+            <span class="label">Adults</span>
+            <span class="sublabel">Age 13+</span>
+          </div>
+          <div class="guest-controls">
+            <button type="button" 
+                    (click)="updateGuests('adults', false)"
+                    [disabled]="form.get('guests.adults')?.value <= 1">
+              <i class="fas fa-minus"></i>
+            </button>
+            <span>{{form.get('guests.adults')?.value}}</span>
+            <button type="button" 
+                    (click)="updateGuests('adults', true)"
+                    [disabled]="getTotalGuests() >= maxGuests">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+        </div>
+  
+        <!-- Children -->
+        <div class="guest-input" *ngIf="allowChildren">
+          <div class="guest-type">
+            <span class="label">Children</span>
+            <span class="sublabel">Ages 2-12</span>
+          </div>
+          <div class="guest-controls">
+            <button type="button" 
+                    (click)="updateGuests('children', false)"
+                    [disabled]="form.get('guests.children')?.value <= 0">
+              <i class="fas fa-minus"></i>
+            </button>
+            <span>{{form.get('guests.children')?.value}}</span>
+            <button type="button" 
+                    (click)="updateGuests('children', true)"
+                    [disabled]="getTotalGuests() >= maxGuests">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+        </div>
+  
+        <!-- Infants -->
+        <div class="guest-input" *ngIf="allowInfants">
+          <div class="guest-type">
+            <span class="label">Infants</span>
+            <span class="sublabel">Under 2</span>
+          </div>
+          <div class="guest-controls">
+            <button type="button" 
+                    (click)="updateGuests('infants', false)"
+                    [disabled]="form.get('guests.infants')?.value <= 0">
+              <i class="fas fa-minus"></i>
+            </button>
+            <span>{{form.get('guests.infants')?.value}}</span>
+            <button type="button" 
+                    (click)="updateGuests('infants', true)"
+                    [disabled]="form.get('guests.infants')?.value >= 4">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Submit Button -->
+      <button type="submit" 
+              class="check-button"
+              [disabled]="!form.valid || isChecking">
+        <span *ngIf="!isChecking">Check Availability</span>
+        <span *ngIf="isChecking">
+          <i class="fas fa-spinner fa-spin"></i>
+          Checking...
+        </span>
+      </button>
+    </form>
+  
+    <!-- Availability Results -->
+    <div *ngIf="availabilityResult" 
+         class="availability-result"
+         [class.available]="availabilityResult.available"
+         [class.unavailable]="!availabilityResult.available">
+      <div *ngIf="availabilityResult.available" class="success-message">
+        <i class="fas fa-check-circle"></i>
+        <h4>Available for your dates!</h4>
+        
+        <div *ngIf="availabilityResult.pricing" class="pricing-details">
+          <div class="price-item">
+            <span>Base Price</span>
+            <span>${{availabilityResult.pricing.basePrice}}</span>
+          </div>
+          <div class="price-item">
+            <span>Cleaning Fee</span>
+            <span>${{availabilityResult.pricing.cleaningFee}}</span>
+          </div>
+          <div class="price-item">
+            <span>Service Fee</span>
+            <span>${{availabilityResult.pricing.serviceFee}}</span>
+          </div>
+          <div class="price-item total">
+            <span>Total</span>
+            <span>${{availabilityResult.pricing.total}}</span>
+          </div>
+          <div class="per-night">
+            ${{availabilityResult.pricing.perNight}} per night
+          </div>
+        </div>
+      </div>
+  
+      <div *ngIf="!availabilityResult.available" class="error-message">
+        <i class="fas fa-times-circle"></i>
+        <h4>Not available for selected dates</h4>
+        <p *ngIf="availabilityResult.restrictions">
+          Please note:
+          <ul>
+            <li>Minimum stay: {{availabilityResult.restrictions.minimumStay}} nights</li>
+            <li>Maximum stay: {{availabilityResult.restrictions.maximumStay}} nights</li>
+            <li>Maximum guests: {{availabilityResult.restrictions.maximumGuests}} people</li>
+          </ul>
+        </p>
+      </div>
+  
+      <button type="button" 
+              class="reset-button"
+              (click)="resetForm()">
+        Check Different Dates
+      </button>
+    </div>
+  </div>
+  

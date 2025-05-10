@@ -1,0 +1,36 @@
+.about-container {
+  position: relative;
+  padding-top: 0;
+  margin-top: 0;
+  /* Create extra space at the top */
+  margin-top: 12rem !important; /* Force override any other margin */
+}
+
+/* Additional top padding for mobile */
+@media (max-width: 768px) {
+  .about-container {
+    margin-top: 14rem !important; /* Even more space on mobile */
+  }
+}
+
+.aspect-w-16 {
+  position: relative;
+  padding-bottom: 56.25%;
+}
+  
+.aspect-w-16 img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+  
+  .hover\:shadow-lg {
+    transition: all 0.3s ease;
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+  

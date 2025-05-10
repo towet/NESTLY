@@ -1,0 +1,112 @@
+:host {
+    display: block;
+    width: 100%;
+  }
+  
+  .map-container {
+    width: 100%;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    height: 100%; 
+  }
+  
+  ::ng-deep {
+    
+    .leaflet-container {
+      height: 100%;
+      width: 100%;
+      border-radius: 0.5rem;
+    }
+  
+    .custom-marker {
+      background: none;
+      border: none;
+      
+      .marker-content {
+        background-color: #fff;
+        border: 2px solid #3730a3;
+        border-radius: 0.5rem;
+        padding: 0.25rem 0.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        white-space: nowrap; 
+        display: flex; 
+        align-items: center; 
+        gap: 0.5rem; 
+        
+        .price {
+          font-size: 0.875rem;
+          font-weight: 600;
+          color: #3730a3;
+        }
+        
+        .icon {
+          font-size: 1rem;
+          color: #3730a3;
+          line-height: 1; 
+        }
+      }
+  
+      // Add hover state
+      &:hover .marker-content {
+        transform: scale(1.05);
+        transition: transform 0.2s ease;
+      }
+    }
+    
+    .marker-popup {
+      padding: 0.5rem;
+      
+      h3 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #1e293b;
+        margin-bottom: 0.25rem;
+      }
+      
+      .price {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #3730a3;
+        margin-bottom: 0.25rem;
+      }
+      
+      .type {
+        font-size: 0.75rem;
+        color: #64748b;
+      }
+    }
+  
+    // Add styles for popup container
+    .leaflet-popup-content-wrapper {
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+  
+    .leaflet-popup-content {
+      margin: 0.5rem;
+      min-width: 200px;
+    }
+  
+    // Add styles for zoom controls
+    .leaflet-control-zoom {
+      border: none;
+      
+      a {
+        background-color: #fff;
+        color: #3730a3;
+        border: 1px solid #e5e7eb;
+        
+        &:hover {
+          background-color: #f8fafc;
+        }
+      }
+    }
+  
+    // Add styles for attribution
+    .leaflet-control-attribution {
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 0 0.5rem;
+      border-radius: 0.25rem;
+    }
+  }
+  

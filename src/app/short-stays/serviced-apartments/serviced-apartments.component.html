@@ -1,0 +1,27 @@
+<div class="main-container min-h-screen flex flex-col">
+    <app-header></app-header>
+  
+    <!-- Using the same margin-top pattern as in office-spaces and other successful components -->
+    <main class="flex-1 w-full bg-white mt-16">
+      <div class="max-w-7xl mx-auto px-4 py-8 md:py-12">
+        <h1 class="text-3xl font-extrabold text-indigo-900 mb-6">Serviced Apartments</h1>
+        <p class="text-gray-700 mb-4">
+          Enjoy hotel-like amenities in a homely setting. Browse our top-rated serviced apartments.
+        </p>
+  
+        <div *ngIf="isLoading" class="text-center py-8">
+          <span class="text-gray-500">Loading serviced apartments...</span>
+        </div>
+  
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" *ngIf="!isLoading">
+          <div *ngFor="let item of listings" class="p-4 border rounded shadow-sm">
+            <h2 class="text-lg font-semibold text-indigo-800">{{ item.title }}</h2>
+            <p class="text-sm text-gray-600">Nightly Rate: KES {{ item.nightlyRate }}</p>
+            <p class="text-sm text-gray-600">Location: {{ item.location }}</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  
+    <app-footer></app-footer>
+  </div>

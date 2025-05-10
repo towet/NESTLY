@@ -1,0 +1,253 @@
+/* =========================================================
+   ✨ Premium Hero Stats Styling (Revised - Cardless) ✨
+   ========================================================= */
+
+.premium-stats-container {
+  display: flex;
+  flex-direction: row; /* Ensure horizontal */
+  justify-content: flex-start; /* Pack items to the start */
+  align-items: flex-start; /* Align tops of items */
+  gap: 10px; /* Further reduced gap */
+  margin: 1.5rem 0 2.5rem; /* Adjusted margin */
+  flex-wrap: wrap; /* Keep wrap for smaller screens */
+  padding: 0; /* Reset padding */
+  width: 100%; /* Make container fill parent column width */
+}
+
+.premium-stat-item {
+  position: relative;
+  display: flex;
+  flex-direction: column; /* Stack icon and content vertically */
+  align-items: center; /* Center items horizontally */
+  min-width: 85px; /* Further reduced min-width */
+  text-align: center;
+  background: none; /* Remove card background */
+  border: none; /* Remove card border */
+  box-shadow: none; /* Remove card shadow */
+  backdrop-filter: none; /* Remove blur */
+  padding: 0;
+  overflow: visible; /* Allow bounce effect to show */
+
+  /* Apply staggered entrance animation */
+  opacity: 0;
+  transform: translateY(20px);
+  animation: item-fade-in-up 0.6s forwards ease-out;
+
+  &:nth-child(1) { animation-delay: 0.2s; }
+  &:nth-child(2) { animation-delay: 0.4s; }
+  &:nth-child(3) { animation-delay: 0.6s; }
+
+  /* --- Icon Wrapper --- */
+  .stat-icon-wrapper {
+    width: 55px; /* Slightly smaller icon container */
+    height: 55px; /* Slightly smaller icon container */
+    margin-bottom: 12px; /* Adjusted margin */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.4s ease;
+    z-index: 2;
+    animation: bounce-icon 1.5s ease-in-out infinite; /* Apply bounce animation */
+
+    i {
+      font-size: 22px; /* Slightly smaller icon */
+      color: white;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  /* Stagger icon bounce animation delays */
+  &.apartments-stat .stat-icon-wrapper { 
+    background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    animation-delay: 0s;
+   }
+  &.locations-stat .stat-icon-wrapper { 
+     background-image: linear-gradient(135deg, #ff9a8b 0%, #ff6a88 100%);
+     animation-delay: 0.2s;
+   }
+  &.rating-stat .stat-icon-wrapper { 
+     background-image: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+     animation-delay: 0.4s;
+  }
+
+  /* --- Content Area --- */
+  .stat-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center text content */
+  }
+
+  /* --- Counter Value --- */
+  .stat-value {
+    font-size: 2rem; /* Further reduced value size */
+    font-weight: 700;
+    line-height: 1.2;
+    color: #fff;
+    margin-bottom: 2px; /* Reduced bottom margin */
+    display: inline-block;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4); /* Adjust shadow */
+    transition: transform 0.4s ease;
+
+    sup {
+      font-size: 1rem; /* Slightly smaller sup */
+      font-weight: 500;
+      margin-left: 2px;
+      vertical-align: super;
+    }
+    
+    &::before { /* Remove glossy effect */
+       content: none;
+    }
+  }
+
+  /* --- Stat Label --- */
+  .stat-label {
+    font-size: 0.8rem; /* Slightly smaller label */
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.75);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 0; /* Ensure no extra top margin */
+  }
+
+  /* --- Star Rating (Adjusted for new layout) --- */
+  .star-rating-premium {
+    display: flex;
+    gap: 3px;
+    margin-top: 8px; /* Add space above stars */
+    z-index: 2;
+    position: static; /* Change from absolute */
+    justify-content: center; /* Center stars */
+
+    .star {
+      font-size: 12px; /* Adjust size */
+      color: rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+      
+      &.active, &.half-active {
+        color: #FFD700; 
+        text-shadow: 0 0 6px rgba(255, 215, 0, 0.6);
+        animation: star-glow-pulse 2.5s infinite ease-in-out;
+        &:nth-child(1) { animation-delay: 0s; }
+        &:nth-child(2) { animation-delay: 0.2s; }
+        &:nth-child(3) { animation-delay: 0.4s; }
+        &:nth-child(4) { animation-delay: 0.6s; }
+        &:nth-child(5) { animation-delay: 0.8s; }
+      }
+    }
+  }
+
+  /* Remove Background Effect */
+  .stat-background-effect { display: none; }
+
+  /* Remove Hover Effects (or adjust if desired) */
+  &:hover {
+    transform: none; /* Remove hover lift/rotate */
+    box-shadow: none;
+    border: none;
+
+    .stat-icon-wrapper {
+       transform: scale(1.05); /* Keep slight icon scale on hover */
+       box-shadow: 0 8px 22px rgba(0, 0, 0, 0.3); /* Adjust shadow on hover */
+    }
+    
+    // Add other hover effects if needed, e.g., text color change
+  }
+}
+
+/* --- Keyframe Animations --- */
+
+/* Icon Bounce Animation */
+@keyframes bounce-icon {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-15px); /* Adjust bounce height */
+  }
+  60% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Item Entrance Animation */
+@keyframes item-fade-in-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Star Glow Animation (keep as is or adjust) */
+@keyframes star-glow-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+    filter: brightness(1.1);
+  }
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) { /* Adjust breakpoint for tablet/smaller */
+  .premium-stats-container {
+    justify-content: space-around; /* Revert to space-around */
+    gap: 20px; /* Adjusted gap */
+  }
+  .premium-stat-item {
+    flex-grow: 0; /* Don't grow on smaller screens */
+    flex-basis: auto; /* Let content determine width */
+  }
+}
+
+@media (max-width: 480px) {
+  .premium-stats-container {
+     gap: 8px; /* Minimal gap */
+     flex-direction: row; /* Keep horizontal */
+     align-items: flex-start; /* Align to top */
+     justify-content: space-around; /* Distribute horizontally */
+     flex-wrap: nowrap; /* Try to force onto one line */
+     padding: 0 5px; /* Add minimal padding */
+  }
+  .premium-stat-item {
+    width: auto; /* Let content size drive width */
+    min-width: 0; /* Allow shrinking */
+    padding: 0 2px; /* Small horizontal padding */
+
+    .stat-icon-wrapper {
+      width: 38px; /* Smaller icon circle */
+      height: 38px; /* Smaller icon circle */
+      margin-bottom: 6px; /* Reduced space */
+      i {
+        font-size: 16px; /* Smaller icon */
+      }
+    }
+    
+    .stat-content {
+      .stat-value {
+        font-size: 1.5rem; /* Smaller value */
+        margin-bottom: 0;
+        sup {
+          font-size: 0.7rem; /* Smaller sup */
+          top: -0.5em;
+        }
+      }
+      .stat-label {
+        font-size: 0.6rem; /* Smaller label */
+        letter-spacing: 0.3px;
+      }
+      .star-rating-premium {
+        margin-top: 3px;
+        .star { font-size: 8px; } /* Smaller stars */
+      }
+    }
+  }
+}

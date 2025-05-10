@@ -1,0 +1,267 @@
+<app-header></app-header>
+
+<div class="search-page-wrapper" style="padding-top: 4rem;">
+  <!-- Overlay for Mobile Filters -->
+  <div class="filters-overlay" 
+  [class.active]="isMobileFiltersVisible"
+  (click)="closeMobileFilters()"></div>
+
+  <!-- Modern Hero Section -->
+  <div class="search-hero glass-morphism">
+    <h1 class="hero-title">
+      <span class="gradient-text">Discover</span> Your Perfect Property
+    </h1>
+    <p class="hero-subtitle">{{ searchResults.length }} properties matching your criteria</p>
+  </div>
+
+  <!-- Mobile Filters Toggle Button -->
+  <button class="mobile-filters-toggle" 
+  (click)="toggleMobileFilters()" 
+  *ngIf="isMobile">
+<i class="fas fa-filter"></i>
+<span>{{ isMobileFiltersVisible ? 'Close Filters' : 'Show Filters' }}</span>
+</button>
+
+  <div class="search-results-container">
+    <!-- Modern Filters Sidebar -->
+    <aside class="filters-sidebar glass-morphism" 
+       [class.active]="isMobileFiltersVisible && isMobile">
+      <!-- Mobile Close Button -->
+      <button *ngIf="isMobile" 
+      class="mobile-close-btn" 
+      (click)="closeMobileFilters()">
+<i class="fas fa-times"></i>
+</button>
+
+      <div class="filters-header">
+        <h2 class="filters-title">
+          <span class="gradient-text">Refine Your Search</span>
+          <span class="filter-count" *ngIf="activeFiltersCount > 0">
+            ({{ activeFiltersCount }})
+          </span>
+        </h2>
+        <button (click)="clearFilters()" class="clear-filters-btn">
+          <i class="fas fa-undo-alt"></i>
+          <span>Reset</span>
+        </button>
+      </div>
+
+      <div class="filters-content">
+        <!-- Location Search -->
+        <div class="filter-section animate-in">
+          <label class="filter-label">
+            <i class="fas fa-map-marker-alt"></i>
+            Location
+          </label>
+          <div class="modern-input-group">
+            <input type="text" 
+                   (input)="onLocationSearch($event)"
+                   (focus)="isSearchFocused = true"
+                   (blur)="isSearchFocused = false"
+                   [class.focused]="isSearchFocused"
+                   placeholder="Enter location..."
+                   class="modern-input">
+            <select (change)="updateSearchRadius($event)" class="modern-select">
+              <option value="5">Within 5 km</option>
+              <option value="10">Within 10 km</option>
+              <option value="20">Within 20 km</option>
+              <option value="50">Within 50 km</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Price Range -->
+        <div class="filter-section animate-in">
+          <label class="filter-label">
+            <i class="fas fa-tag"></i>
+            Price Range (up to {{ priceRange.current | currency:'KSH' }})
+          </label>
+          <div class="price-slider-container">
+            <input type="range"
+                   [min]="priceRange.min"
+                   [max]="priceRange.max"
+                   [value]="priceRange.current"
+                   (input)="updatePriceRange($event)"
+                   class="modern-range">
+            <div class="price-display">
+              {{ priceRange.current | currency:'KSH' }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Categories -->
+        <div class="filter-section animate-in">
+          <label class="filter-label">
+            <i class="fas fa-home"></i>
+            Categories
+          </label>
+          <div class="modern-checkbox-group">
+            <label *ngFor="let category of categories" class="modern-checkbox">
+              <input type="checkbox"
+                     [checked]="selectedCategories.includes(category)"
+                     (change)="toggleCategory(category)">
+              <span class="checkbox-custom"></span>
+              <span class="checkbox-label">{{ category }}</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Amenities -->
+        <div class="filter-section animate-in">
+          <label class="filter-label">
+            <i class="fas fa-concierge-bell"></i>
+            Amenities
+          </label>
+          <div class="amenities-grid">
+            <label *ngFor="let amenity of availableAmenities; trackBy: trackByAmenity" 
+                   class="amenity-chip"
+                   [class.active]="selectedAmenities.includes(amenity.id)">
+              <input type="checkbox"
+                     [checked]="selectedAmenities.includes(amenity.id)"
+                     (change)="toggleAmenity(amenity.id)">
+              <i class="fas {{ amenity.icon }}"></i>
+              <span>{{ amenity.label }}</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Sort Options -->
+        <div class="filter-section animate-in">
+          <label class="filter-label">
+            <i class="fas fa-sort"></i>
+            Sort By
+          </label>
+          <select (change)="updateSort($event)" class="modern-select">
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="newest">Newest First</option>
+          </select>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="results-main">
+      <!-- Loading State -->
+      <div *ngIf="isLoading" class="modern-loading-state">
+        <div class="loader-ring"></div>
+        <p>Finding your perfect match...</p>
+      </div>
+
+      <!-- Error State -->
+      <div *ngIf="error" class="modern-error-state glass-morphism">
+        <i class="fas fa-exclamation-circle"></i>
+        <p>{{ error }}</p>
+        <button (click)="performSearch()" class="retry-btn">
+          <i class="fas fa-redo"></i>
+          Try Again
+        </button>
+      </div>
+
+      <!-- View Controls -->
+      <div class="view-controls" *ngIf="!isLoading && !error">
+        <div class="view-mode-toggle">
+          <button (click)="toggleViewMode()" 
+                  [class.active]="viewMode === 'grid'"
+                  title="Grid View">
+            <i class="fas fa-th-large"></i>
+          </button>
+          <button (click)="toggleViewMode()" 
+                  [class.active]="viewMode === 'list'"
+                  title="List View">
+            <i class="fas fa-list"></i>
+          </button>
+        </div>
+        <div class="results-count">
+          {{ searchResults.length }} properties found
+        </div>
+      </div>
+
+      <!-- Results Grid/List -->
+      <div *ngIf="!isLoading && !error" 
+           [class]="viewMode === 'grid' ? 'modern-results-grid' : 'modern-results-list'">
+        <div *ngFor="let property of paginatedResults" 
+             class="modern-property-card glass-morphism">
+          <!-- Property Image -->
+          <div class="property-image-wrapper">
+            <img [src]="property?.images?.[0]" 
+                 [alt]="property?.title"
+                 class="property-image"
+                 (click)="property?.id ? viewProperty(property.id) : null">
+            
+            <div class="property-badges">
+              <span class="property-badge category">{{ property.category }}</span>
+              <span class="property-badge distance" *ngIf="getDistanceText(property)">
+                <i class="fas fa-map-marker-alt"></i>
+                {{ getDistanceText(property) }}
+              </span>
+            </div>
+
+
+    
+          </div>
+
+          <!-- Property Details -->
+          <div class="property-content">
+            <div class="property-price">{{ property.price | currency:'KSH' }}</div>
+            <h3 class="property-title">{{ property.title }}</h3>
+            <p class="property-location">
+              <i class="fas fa-map-marker-alt"></i>
+              {{ property.location }}
+            </p>
+
+            <div class="property-features">
+              <div class="feature-circle purple" *ngIf="property.bedrooms !== undefined">
+                <i class="fas fa-bed"></i>
+                <span>{{ property.bedrooms }}</span>
+              </div>
+              <div class="feature-circle cyan" *ngIf="property.bathrooms !== undefined">
+                <i class="fas fa-bath"></i>
+                <span>{{ property.bathrooms }}</span>
+              </div>
+              <div class="feature-circle orange">
+                <i class="fas fa-building"></i>
+                <span>{{ property.propertySize }}</span>
+              </div>
+              <div class="sq-ft-label">sq ft</div>
+            </div>
+            
+            <div class="location-circle">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>{{ property.location }}</span>
+            </div>
+
+            <div class="property-actions">
+              <button (click)="property?.id ? viewProperty(property.id) : null" 
+                      [disabled]="!property?.id"
+                      class="view-details-btn">
+                View Details
+                <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div *ngIf="totalPages > 1" class="modern-pagination glass-morphism">
+        <button (click)="changePage(currentPage - 1)"
+                [disabled]="currentPage === 1"
+                class="pagination-btn">
+          <i class="fas fa-chevron-left"></i>
+          Previous
+        </button>
+        <span class="page-info">
+          Page {{ currentPage }} of {{ totalPages }}
+        </span>
+        <button (click)="changePage(currentPage + 1)"
+                [disabled]="currentPage === totalPages"
+                class="pagination-btn">
+          Next
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </main>
+  </div>
+</div>
+<app-footer></app-footer>

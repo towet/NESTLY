@@ -1,0 +1,129 @@
+<!-- Land Properties -->
+<app-header></app-header>
+
+<div class="land-wrapper">
+  <div class="container mx-auto px-4 py-8">
+    <div class="mb-8 text-center">
+      <h1 class="text-3xl font-bold text-gray-900 mb-3">Land Properties</h1>
+      <p class="text-gray-600 max-w-2xl mx-auto">
+        Find the perfect piece of land for your development, farming, or recreational needs. Browse our selection of vacant, agricultural, mixed-use, and recreational land.
+      </p>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs mb-8 flex justify-center flex-wrap">
+      <button 
+        class="filter-tab" 
+        [class.active]="selectedSubCategory === 'All'"
+        (click)="selectSubCategory('All')">
+        All
+      </button>
+      <button 
+        *ngFor="let sub of landSubCategories" 
+        class="filter-tab" 
+        [class.active]="selectedSubCategory === sub"
+        (click)="selectSubCategory(sub)">
+        {{ sub }}
+      </button>
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="loading-container">
+      <div class="spinner"></div>
+      <p>Loading land properties...</p>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="error" class="error-container bg-red-50 text-red-800 p-4 rounded-lg mb-8">
+      <h3 class="font-semibold text-lg mb-2">Oops! Something went wrong</h3>
+      <p class="mb-3">{{ error }}</p>
+      <button 
+        (click)="retryFetch()" 
+        class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors">
+        Try Again
+      </button>
+    </div>
+
+    <!-- No Listings State -->
+    <div *ngIf="!isLoading && !error && filteredListings.length === 0" class="no-listings-container">
+      <i class="fas fa-tree no-listings-icon"></i>
+      <h3>No Land Properties Found</h3>
+      <p>We couldn't find any land properties matching your criteria. Please try a different filter or check back later.</p>
+      <button 
+        *ngIf="selectedSubCategory !== 'All'" 
+        (click)="selectSubCategory('All')" 
+        class="reset-button">
+        View All Properties
+      </button>
+    </div>
+
+    <!-- Listings Grid -->
+    <div *ngIf="!isLoading && !error && filteredListings.length > 0" class="listings-grid">
+      <div 
+        *ngFor="let listing of filteredListings"
+        class="listing-card scroll-reveal"
+        #listingCard
+        (click)="viewListing(listing.id)">
+        <div class="card-inner">
+          <!-- Image Container -->
+          <div class="card-image-container">
+            <img 
+              [src]="listing.images?.[0] || defaultImage" 
+              [alt]="listing.title"
+              class="card-image"
+              loading="lazy">
+            <div class="card-price">KES {{ listing.price | number }}</div>
+            <button class="favorite-button" (click)="$event.stopPropagation()">
+              <i class="far fa-heart"></i>
+            </button>
+          </div>
+
+          <!-- Card Content -->
+          <div class="card-content">
+            <h3 class="card-title">{{ listing.title }}</h3>
+            
+            <!-- Property Details with Colorful Icons -->
+            <div class="card-details">
+              <!-- First row: Location and Type side by side -->
+              <div class="details-row">
+                <div class="detail-item">
+                  <div class="icon-circle location-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                  </div>
+                  <span>{{ listing.location }}</span>
+                </div>
+                
+                <div class="detail-item">
+                  <div class="icon-circle type-icon">
+                    <i class="fas fa-tree"></i>
+                  </div>
+                  <span>{{ listing.subCategory || 'Land' }}</span>
+                </div>
+              </div>
+              
+              <!-- Property Size if available -->
+              <div class="detail-item" *ngIf="listing.landSize">
+                <div class="icon-circle size-icon">
+                  <i class="fas fa-ruler-combined"></i>
+                </div>
+                <span>{{ listing.landSize }} {{ listing.sizeUnit || 'acres' }}</span>
+              </div>
+            </div>
+            
+            <!-- Features Pills (if available) -->
+            <div class="features-pills flex flex-wrap gap-2 mt-3" *ngIf="listing.features?.length">
+              <div 
+                *ngFor="let feature of listing.features" 
+                class="pill-tag text-xs px-3 py-1 bg-gray-100 text-gray-700 rounded-full flex items-center">
+                <i class="fas fa-check text-green-500 mr-1"></i>
+                {{ feature }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

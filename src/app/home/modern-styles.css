@@ -1,0 +1,407 @@
+/* Add gradient background to header */
+header {
+  background: linear-gradient(to right, #ffffff, #f8fafc);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+  z-index: 40;
+  transition: opacity 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+/* Modern logo styling */
+.logo-text {
+  background: linear-gradient(45deg, #4338ca, #6366f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.5px;
+}
+
+/* Modern search button */
+.search-button {
+  background: linear-gradient(45deg, #4f46e5, #6366f1);
+  transition: transform 0.2s;
+}
+
+.search-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);
+}
+
+/* Modern brown pane styling */
+.brown-pane {
+  background: linear-gradient(45deg, #1e293b, #334155);
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(12px);
+  margin-left: 2rem;
+}
+
+/* Modern form inputs */
+.form-input, .form-select {
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(4px);
+  color: white;
+  transition: all 0.2s;
+}
+
+.form-input:focus, .form-select:focus {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+
+
+.feed-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  transform: translateY(0);
+  transition: all 0.4s var(--transition-smooth);
+}
+
+.feed-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+.feed-card .relative::after {
+  pointer-events: none;
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.3), transparent);
+  opacity: 0;
+  transition: opacity 0.3s var(--transition-smooth);
+}
+
+.feed-card:hover .relative::after {
+  opacity: 1;
+}
+
+/* Image container */
+.feed-card .relative {
+  height: 240px;
+}
+
+.feed-card img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  transition: transform 0.3s;
+}
+
+.feed-card:hover img {
+  transform: scale(1.05);
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #f3f4f6;
+  border-radius: 50%;
+  border-top-color: #4f46e5;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.about-footer {
+  background: linear-gradient(45deg, #1e293b, #334155);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.05;
+}
+
+.footer-inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* Button hover effects */
+.nav-link {
+  position: relative;
+  transition: color 0.2s;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #4f46e5;
+  transition: width 0.2s;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Smooth transitions for dropdowns */
+
+.group-hover\:block {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(229, 231, 235, 0.5);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 0;
+  min-width: 200px;
+  transition: opacity 0.2s, transform 0.2s;
+  transform-origin: top;
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.group:hover .group-hover\:block {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Fix dropdown text and add modern hover effects */
+.group-hover\:block a {
+  color: var(--text-primary);
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+  position: relative;
+  font-size: 0.875rem;
+}
+
+.group-hover\:block a:hover {
+  background: rgba(79, 70, 229, 0.05);
+  color: var(--primary);
+  padding-left: 1.5rem;
+}
+
+/* Add hover indicator */
+.group-hover\:block a::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 1.5rem;
+  background: var(--primary);
+  opacity: 0;
+  transition: all 0.2s;
+}
+
+.group-hover\:block a:hover::before {
+  width: 3px;
+  opacity: 1;
+}
+
+/* Add dividers between items */
+.group-hover\:block a:not(:last-child) {
+  border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+}
+
+/* Modern dropdown arrow */
+.group > a svg {
+  transition: transform 0.2s;
+}
+
+.group:hover > a svg {
+  transform: rotate(180deg);
+}
+
+/* Mobile dropdown adjustments */
+.mobile-menu .group-hover\:block {
+  position: static;
+  box-shadow: none;
+  border-radius: 0;
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+
+.mobile-menu .group-hover\:block a {
+  padding: 0.75rem 1.5rem;
+  color: var(--text-secondary);
+}
+
+.mobile-menu .group-hover\:block a:hover {
+  background: rgba(79, 70, 229, 0.05);
+  color: var(--primary);
+}
+
+/* Fix logo text without affecting other text */
+.logo-text {
+  background: linear-gradient(45deg, #4338ca, #6366f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.5px;
+}
+
+/* Ensure other text is visible */
+header nav a {
+  color: var(--text-primary);
+  -webkit-text-fill-color: initial; /* Reset any inherited transparent text */
+}
+
+/* Add subtle animation for dropdown appearance */
+@keyframes dropdownAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.group:hover .group-hover\:block {
+  animation: dropdownAppear 0.2s ease-out;
+}
+
+.property-detail {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+}
+
+.mobile-menu {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+}
+
+:root {
+  --primary: #4f46e5;
+  --primary-dark: #4338ca;
+  --secondary: #ec4899;
+  --accent: #8b5cf6;
+  --background: #f8fafc;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --dropdown-bg: rgba(255, 255, 255, 0.95);
+  --dropdown-border: rgba(229, 231, 235, 0.5);
+  --dropdown-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  --hover-bg: rgba(79, 70, 229, 0.05);
+
+  --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --animation-duration: 0.6s;
+  --animation-delay-base: 0.1s;
+  --scroll-margin: 100px;
+
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+
+}
+
+
+.dropdown-menu {
+  display: block; 
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none; 
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+
+.group:hover .dropdown-menu {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+/* Page Transition Animation */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity var(--animation-duration) var(--transition-smooth),
+              transform var(--animation-duration) var(--transition-smooth);
+}
+
+/* Scroll Reveal Animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity var(--animation-duration) var(--transition-smooth),
+              transform var(--animation-duration) var(--transition-smooth);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger Children Animations */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.stagger-children.active > * {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity var(--animation-duration) var(--transition-smooth),
+              transform var(--animation-duration) var(--transition-smooth);
+}
+
+.stagger-children.active > *:nth-child(1) { transition-delay: calc(var(--animation-delay-base) * 1); }
+.stagger-children.active > *:nth-child(2) { transition-delay: calc(var(--animation-delay-base) * 2); }
+.stagger-children.active > *:nth-child(3) { transition-delay: calc(var(--animation-delay-base) * 3); }
+/* Add more if needed */
+
+
+/* Parallax Container */
+.parallax-container {
+  perspective: 1000px;
+  overflow: hidden;
+}
+
+.parallax-element {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* Smooth Section Transitions */
+.section-transition {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s var(--transition-smooth);
+}
+
+.section-transition.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+

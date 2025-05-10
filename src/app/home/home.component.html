@@ -1,0 +1,578 @@
+<div class="main-container min-h-screen flex flex-col">
+  <!-- Use shared header component -->
+  <app-header></app-header>
+
+  <!-- MAIN CONTENT with normal padding for standard header height -->
+  <main class="flex-1 w-full bg-gray-50">
+    <!-- Premium Luxury Hero Section with Advanced Animations -->
+    <div class="premium-hero-section">
+      <!-- Animated particles overlay -->
+      <div class="premium-particles">
+        <div class="particle particle-1"></div>
+        <div class="particle particle-2"></div>
+        <div class="particle particle-3"></div>
+        <div class="particle particle-4"></div>
+        <div class="particle particle-5"></div>
+      </div>
+      
+      <!-- Main Content Container -->
+      <div class="hero-content-container relative z-20 h-full flex items-center">
+        <div class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
+          
+          <!-- Left Column: Text Content with Premium Animations -->
+          <div class="hero-text-content w-full lg:w-1/2 text-white mt-20 lg:mt-0">
+            <!-- Animated Badge -->
+            <div class="inline-flex items-center bg-gradient-to-r from-amber-500 to-amber-600 px-3 py-1 rounded-full mb-5 premium-animate-up" style="--delay: 0.2s">
+              <i class="fas fa-star text-white mr-2 premium-pulse"></i>
+              <span class="text-sm font-semibold uppercase tracking-wide">Premium Experience</span>
+            </div>
+            
+            <!-- Main Headline with Split Text Animation -->
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-6 premium-animate-title">
+              <span class="block premium-animate-up" style="--delay: 0.4s">Luxury</span>
+              <span class="block premium-animate-up" style="--delay: 0.6s">Serviced</span>
+              <span class="block premium-animate-up" style="--delay: 0.8s">Apartments</span>
+            </h1>
+            
+            <!-- Description Text -->
+            <p class="text-base sm:text-lg text-gray-100 mb-8 max-w-xl premium-animate-up" style="--delay: 1s">
+              Experience the perfect blend of hotel luxury and home comfort in our premium selection of serviced apartments.
+            </p>
+            
+            <!-- Award-Winning Premium Stats Showcase (Moved Back Inside) -->
+            <div class="premium-stats-container premium-animate-up" style="--delay: 1.2s">
+                
+              <!-- Apartments Stat Item -->
+              <div class="premium-stat-item apartments-stat">
+                <div class="stat-icon-wrapper">
+                  <i class="fas fa-building"></i>
+                </div>
+                <div class="stat-content">
+                  <div class="stat-value counter-value" data-target="500">0<sup>+</sup></div>
+                  <div class="stat-label">Apartments</div>
+                </div>
+              </div>
+              
+              <!-- Locations Stat Item -->
+              <div class="premium-stat-item locations-stat">
+                <div class="stat-icon-wrapper">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="stat-content">
+                  <div class="stat-value counter-value" data-target="20">0<sup>+</sup></div>
+                  <div class="stat-label">Locations</div>
+                </div>
+              </div>
+              
+              <!-- Average Rating Stat Item -->
+              <div class="premium-stat-item rating-stat">
+                <div class="stat-icon-wrapper">
+                  <i class="fas fa-star"></i>
+                </div>
+                <div class="stat-content">
+                  <div class="stat-value counter-value" data-target="4.9">0.0</div>
+                  <div class="stat-label">Average Rating</div>
+                  <div class="star-rating-premium">
+                    <span class="star active"><i class="fas fa-star"></i></span>
+                    <span class="star active"><i class="fas fa-star"></i></span>
+                    <span class="star active"><i class="fas fa-star"></i></span>
+                    <span class="star active"><i class="fas fa-star"></i></span>
+                    <span class="star half-active"><i class="fas fa-star-half-alt"></i></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        
+          <!-- Right Column: Interactive Property Search Trigger Card -->
+          <div class="w-full lg:w-1/2 flex justify-center lg:justify-end items-center relative z-30">
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- PROPERTY SEARCH SECTION BELOW HERO -->  
+  <section class="property-search-section py-10 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Left Column: Search Form -->
+        <div class="search-form-container bg-gradient-to-br from-indigo-900 to-purple-900 rounded-2xl p-6 shadow-xl relative overflow-hidden">
+          <!-- NEW! Badge -->
+          <div class="new-badge">NEW!</div>
+          <!-- Decorative Elements -->
+          <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-0 w-40 h-40 bg-white rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+            <div class="absolute bottom-0 right-0 w-60 h-60 bg-purple-400 rounded-full blur-3xl translate-x-1/3 translate-y-1/3"></div>
+            <div class="absolute top-1/2 left-1/2 w-64 h-64 bg-indigo-500 rounded-lg blur-2xl -translate-x-1/2 -translate-y-1/2 rotate-45 opacity-80"></div>
+          </div>
+          <!-- Modern Search Card Header with enhanced design -->
+          <div class="search-header-modern relative z-10 mb-6 sm:mb-10">
+            <!-- Decorative elements -->
+            <div class="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full blur-xl opacity-30 animate-pulse-slow"></div>
+            <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-gradient-to-tr from-indigo-600 to-purple-500 rounded-full blur-xl opacity-20 animate-float"></div>
+            
+            <!-- Title with icon -->
+            <div class="flex items-center gap-3 mb-4">
+              <div class="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg transform rotate-3 animate-float">
+                <i class="fas fa-home text-white text-lg sm:text-xl"></i>
+              </div>
+              <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white bg-clip-text text-transparent bg-gradient-to-r from-white via-indigo-100 to-purple-100">Find Your Dream Home</h2>
+            </div>
+            
+            <!-- Enhanced subtitle with icon -->
+            <div class="flex items-center gap-2 mb-4 sm:mb-6 ml-1">
+              <i class="fas fa-map-marker-alt text-indigo-300"></i>
+              <p class="text-sm sm:text-base text-gray-200">Discover exceptional properties tailored to your needs</p>
+            </div>
+            
+            <!-- Stats card with enhanced visual -->
+            <div class="inline-flex items-center gap-3 py-1 px-3 sm:py-2 sm:px-4 bg-gradient-to-r from-indigo-800/40 to-purple-800/40 rounded-full backdrop-blur-sm border border-indigo-500/20 shadow-inner">
+              <div class="h-5 w-5 sm:h-6 sm:w-6 rounded-full bg-gradient-to-r from-green-400 to-green-500 flex items-center justify-center shadow-sm">
+                <i class="fas fa-check text-xs text-white"></i>
+              </div>
+              <p class="text-xs sm:text-sm text-indigo-200 flex items-center gap-1">
+                <span class="font-semibold text-white">10,000+</span> properties found by our users
+                <i class="fas fa-users text-xs text-indigo-300 ml-1"></i>
+                <span class="text-indigo-300 font-semibold">this month</span>
+              </p>
+            </div>
+          </div>
+
+          <!-- NEW SEARCH FORM HTML STARTS HERE -->
+          <div class="search-form space-y-4 relative z-10">
+            <!-- Category -->
+            <div class="form-group">
+              <label class="block text-sm font-medium text-white mb-1">Property Category</label>
+              <select [(ngModel)]="search.category" (change)="onCategoryChange()" class="form-select w-full">
+                <option value="">Select Category</option>
+                <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+              </select>
+            </div>
+            <!-- Subcategory -->
+            <div class="form-group" *ngIf="subCategories && subCategories.length">
+              <label class="block text-sm font-medium text-white mb-1">Subcategory</label>
+              <select [(ngModel)]="search.subCategory" (change)="onSubCategoryChange()" class="form-select w-full">
+                <option value="">Select Subcategory</option>
+                <option *ngFor="let sub of subCategories" [value]="sub">{{ sub }}</option>
+              </select>
+            </div>
+            <!-- More filters... -->
+            <div class="form-group" *ngIf="details && details.length">
+              <label class="block text-sm font-medium text-white mb-1">Detail</label>
+              <select [(ngModel)]="search.detail" class="form-select w-full">
+                <option value="">Select Detail</option>
+                <option *ngFor="let det of details" [value]="det">{{ det }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="block text-sm font-medium text-white mb-1">Location</label>
+              <div class="relative">
+                <input type="text" 
+                       [(ngModel)]="search.location" 
+                       (input)="onLocationInput($event)"
+                       placeholder="Enter location..." 
+                       class="form-input w-full" 
+                       [class.border-green-500]="searchCoordinates"
+                       [class.border-red-500]="search.location && !searchCoordinates"
+                       autocomplete="off" />
+  
+                           <!-- Location Suggestions Dropdown -->
+      <div *ngIf="locationSuggestions && locationSuggestions.length && search.location" 
+      class="absolute z-50 left-0 right-0 mt-1 bg-white rounded-md shadow-lg max-h-60 overflow-y-auto">
+   <div class="py-1">
+     <button *ngFor="let suggestion of locationSuggestions"
+             (click)="selectLocation(suggestion)"
+             class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-start">
+       <span class="mr-2 text-gray-400">
+         <i class="fas fa-map-marker-alt"></i>
+       </span>
+       <div class="flex-1">
+         <div class="font-medium">{{suggestion.mainText}}</div>
+         <div class="text-xs text-gray-500">{{suggestion.secondaryText}}</div>
+       </div>
+     </button>
+   </div>
+  </div>
+  
+                <div class="absolute right-2 top-1/2 transform -translate-y-1/2 flex items-center space-x-2">
+                  <i *ngIf="searchCoordinates" class="fas fa-check-circle text-green-500"></i>
+                  <i *ngIf="search.location && !searchCoordinates" class="fas fa-exclamation-circle text-red-500"></i>
+                </div>
+              </div>
+              <small *ngIf="search.location && !searchCoordinates" class="text-red-400">
+                Please select a valid location
+              </small>
+  
+                <!-- Selected Location Details -->
+    <div *ngIf="selectedLocation" class="mt-2 p-2 bg-white bg-opacity-10 rounded">
+      <div class="text-xs text-white">
+        <div class="font-medium">{{selectedLocation.mainText}}</div>
+        <div class="opacity-75">{{selectedLocation.secondaryText}}</div>
+      </div>
+    </div>
+            </div>          
+            <div class="form-group">
+              <label class="block text-sm font-medium text-white mb-1">
+                Price Range: {{ search.price | currency:'KSH' }}
+              </label>
+              <input type="range" 
+                     [(ngModel)]="search.price" 
+                     min="0" 
+                     max="1000000" 
+                     step="50000" 
+                     class="w-full accent-red-600" />
+              <div class="flex justify-between text-xs text-white mt-1">
+                <span>KSH0</span>
+                <span>KSH1,000,000</span>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="block text-sm font-medium text-white mb-1">Fully Serviced Purchase?</label>
+              <label class="inline-flex items-center">
+                <input type="checkbox" [(ngModel)]="search.fullyServicedPurchase" class="form-checkbox text-indigo-600" />
+                <span class="ml-2 text-sm text-white">Yes, let Nestify handle it all</span>
+              </label>
+            </div>
+            <!-- Search Button -->
+            <div class="form-group">
+              <button class="search-button bg-red-600 text-white px-4 py-2 rounded-md 
+              hover:bg-red-700 transition-colors text-sm font-medium" 
+       (click)="performSearch()"
+       [disabled]="isLoading">
+  <i class="fas fa-spinner fa-spin" *ngIf="isLoading"></i>
+  <i class="fas fa-search mr-1" *ngIf="!isLoading"></i>
+  {{ isLoading ? 'Searching...' : 'Search' }}
+  </button>
+  
+  <div *ngIf="searchError" 
+  class="mt-2 p-2 bg-red-50 border border-red-200 rounded-md">
+  <p class="text-red-600 text-sm">
+  <i class="fas fa-exclamation-circle mr-1"></i>
+  {{ searchError }}
+  </p>
+  </div>
+  
+            </div>
+          </div>
+          <!-- NEW SEARCH FORM HTML ENDS HERE -->
+        </div>
+
+        <!-- Right Column: Property Showcase with Stylish Image Carousel -->
+        <div class="property-showcase relative overflow-hidden rounded-2xl shadow-xl">
+          <!-- Modern Image Carousel with Smooth Transitions -->
+          <div class="premium-carousel h-full relative">
+            <!-- Gradient Overlay for Text Readability -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-70 z-10"></div>
+            
+            <!-- Navigation Arrows with Improved Styling -->
+            <button class="carousel-arrow left-arrow" (click)="prevImage()">
+              <div class="arrow-icon-container">
+                <i class="fas fa-chevron-left"></i>
+              </div>
+            </button>
+            <button class="carousel-arrow right-arrow" (click)="nextImage()">
+              <div class="arrow-icon-container">
+                <i class="fas fa-chevron-right"></i>
+              </div>
+            </button>
+            
+            <!-- Property Images with Transition Effect -->
+            <div class="carousel-container">
+              <div *ngFor="let slide of propertySlides; let i = index" 
+                   class="carousel-slide" 
+                   [ngClass]="{
+                     'active': i === currentIndex,
+                     'next': i === getNextIndex(),
+                     'prev': i === getPrevIndex()
+                   }">
+                <img [src]="slide.image" [alt]="slide.title" class="carousel-image">
+              </div>
+            </div>
+            
+            <!-- Property Information Overlay with Enhanced Animation -->
+            <div class="property-info-overlay">
+              <!-- Stylish Category Color Line -->
+              <div class="category-color-line animate-slide-right" 
+                   [ngClass]="propertySlides[currentIndex].type + '-color'" 
+                   [style.animation-delay]="'0.05s'"></div>
+              
+              <!-- Property Category Badge with Animation -->
+              <div class="property-badge animate-slide-up" 
+                   [ngClass]="propertySlides[currentIndex].type + '-badge'" 
+                   [style.animation-delay]="'0.1s'">
+                {{propertySlides[currentIndex].category}}
+              </div>
+              
+              <!-- Property Title with Animation -->
+              <h3 class="property-title animate-slide-up" [style.animation-delay]="'0.2s'">
+                {{propertySlides[currentIndex].title}}
+              </h3>
+              
+              <!-- Location & Size with Animation -->
+              <p class="property-location animate-slide-up" [style.animation-delay]="'0.3s'">
+                <i class="fas fa-map-marker-alt location-icon"></i>
+                {{propertySlides[currentIndex].location}}
+              </p>
+              
+              <!-- Price with Animation -->
+              <div class="property-price animate-slide-up" [style.animation-delay]="'0.4s'">
+                {{propertySlides[currentIndex].price}}
+              </div>
+              
+              <!-- Modern Progress Bar instead of dots -->
+              <div class="carousel-progress-container animate-slide-up" [style.animation-delay]="'0.5s'">
+                <div class="carousel-progress-bar">
+                  <div class="carousel-progress-indicator" [style.width.%]="(currentIndex / (images.length - 1)) * 100"></div>
+                </div>
+                <div class="carousel-counter">{{ currentIndex + 1 }}/{{ images.length }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- FEED SECTION -->
+  <section class="feed-section px-4 sm:px-6 py-8 sm:py-12 bg-gradient-to-b from-white to-gray-50 reveal">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl font-bold text-gray-900 relative inline-block feed-title">
+        Featured Listings
+        <span class="feed-title-underline"></span>
+      </h2>
+ 
+      <div class="filter-tabs-container">
+        <button *ngFor="let tab of tabs"
+                (click)="selectTab(tab.value)"
+                class="filter-tab"
+                [class.active]="selectedTab === tab.value"
+                [attr.aria-selected]="selectedTab === tab.value">
+          <span class="tab-text">{{ tab.label }}</span>
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 listings-grid">
+        <ng-container *ngIf="!error; else errorTemplate">
+          <ng-container *ngIf="!isLoading; else loadingTemplate">
+            <ng-container *ngIf="featuredListings.length; else noListings">
+              <div *ngFor="let listing of featuredListings; let i = index" 
+                  class="property-card scroll-reveal"
+                  [class.appear]="true"
+                  [style.--card-index]="i"
+                  [style.animation-delay]="i * 0.05 + 's'" 
+                  (click)="viewProperty(listing.id)"
+                  #listingCard>
+                <div class="property-card-inner">
+                  <div class="property-image-wrapper">
+                    <!-- Image placeholder shown during loading -->
+                    <div class="image-placeholder shimmer"></div>
+                    <!-- Optimized image loading with width and height attributes -->
+                    <img [src]="listing.images?.[0] || 'assets/best.jpg'" 
+                         [attr.loading]="i < 4 ? 'eager' : 'lazy'" 
+                         [attr.fetchpriority]="i < 4 ? 'high' : 'auto'" 
+                         width="100%" height="240"
+                         alt="Property" 
+                         class="property-image" />
+                    <div class="property-badge" *ngIf="listing.isNew">New</div>
+                    <div class="property-type-badge">{{ listing.category }}</div>
+                    <div class="property-favorite" (click)="$event.stopPropagation()">
+                      <i class="far fa-heart"></i>
+                    </div>
+                  </div>
+                  <div class="property-content">
+                    <div class="property-price">{{ listing.price | currency:'KSH' }}</div>
+                    <div class="property-features">
+                      <div class="feature beds-feature">
+                        <div class="feature-icon-wrapper">
+                          <i class="fas fa-bed"></i>
+                        </div>
+                        <span>{{ listing.bedrooms }}</span>
+                      </div>
+                      <div class="feature baths-feature">
+                        <div class="feature-icon-wrapper">
+                          <i class="fas fa-bath"></i>
+                        </div>
+                        <span>{{ listing.bathrooms }}</span>
+                      </div>
+                      <div class="feature area-feature">
+                        <div class="feature-icon-wrapper">
+                          <i class="fas fa-ruler-combined"></i>
+                        </div>
+                        <span>{{ listing.propertySize }}sq ft</span>
+                      </div>
+                    </div>
+                    <div class="property-location">
+                      <div class="location-icon-wrapper">
+                        <i class="fas fa-map-marker-alt"></i>
+                      </div>
+                      <span>{{ listing.location }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </div> <!-- END grid -->
+
+      <ng-template #loadingTemplate>
+        <div class="col-span-full flex justify-center py-12">
+          <div class="loader">
+            <div class="loader-circle"></div>
+            <div class="loader-circle"></div>
+            <div class="loader-circle"></div>
+          </div>
+        </div>
+      </ng-template>
+      
+      <ng-template #noListings>
+        <div class="col-span-full text-center py-12 empty-state">
+          <i class="fas fa-home empty-icon"></i>
+          <p class="empty-text">No properties found matching your criteria</p>
+          <button (click)="selectTab('all')" 
+                  class="empty-button">
+            View all properties
+          </button>
+        </div>
+      </ng-template>
+
+      <ng-template #errorTemplate>
+        <div class="col-span-full text-center py-12 error-state">
+          <i class="fas fa-exclamation-circle error-icon"></i>
+          <p class="error-text">{{ error }}</p>
+          <button (click)="loadFeaturedListings()" 
+                  class="error-button">
+            Try again
+          </button>
+        </div>
+      </ng-template>
+    </div>
+  </section>
+  
+  <!-- Modern, Stylish Footer -->
+  <footer class="bg-gradient-to-r from-indigo-900 to-purple-900 text-white relative overflow-hidden">
+    <!-- Decorative Elements -->
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-0 left-0 w-40 h-40 bg-white rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+      <div class="absolute bottom-0 right-0 w-60 h-60 bg-purple-400 rounded-full blur-3xl translate-x-1/3 translate-y-1/3"></div>
+    </div>
+    
+    <div class="max-w-7xl mx-auto px-4 py-8 md:py-10 relative z-10">
+      <!-- Top Section with Logo and Description -->
+      <div class="flex flex-col md:flex-row justify-between items-start mb-8 gap-8">
+        <div class="md:w-1/3">
+          <div class="mb-4">
+            <h2 class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-200 to-purple-200">NESTIFY</h2>
+          </div>
+          <p class="text-indigo-100 text-sm leading-relaxed mb-4">
+            Transforming real estate experiences with innovative technology solutions.
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-indigo-200 hover:text-white transition-colors duration-300">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="text-indigo-200 hover:text-white transition-colors duration-300">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="text-indigo-200 hover:text-white transition-colors duration-300">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="text-indigo-200 hover:text-white transition-colors duration-300">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Quick Links Section -->
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-10">
+          <!-- Properties Column -->
+          <div>
+            <h3 class="font-medium text-sm mb-3 text-indigo-200">Properties</h3>
+            <ul class="space-y-1.5">
+              <li><a routerLink="/properties/residential" class="text-xs text-indigo-100 hover:text-white transition-colors">Residential</a></li>
+              <li><a routerLink="/properties/commercial" class="text-xs text-indigo-100 hover:text-white transition-colors">Commercial</a></li>
+              <li><a routerLink="/properties/land" class="text-xs text-indigo-100 hover:text-white transition-colors">Land & Plots</a></li>
+            </ul>
+          </div>
+          
+          <!-- Company Column -->
+          <div>
+            <h3 class="font-medium text-sm mb-3 text-indigo-200">Company</h3>
+            <ul class="space-y-1.5">
+              <li><a routerLink="/about" class="text-xs text-indigo-100 hover:text-white transition-colors">About Us</a></li>
+              <li><a routerLink="/help/contact-support" class="text-xs text-indigo-100 hover:text-white transition-colors">Contact</a></li>
+            </ul>
+          </div>
+          
+          <!-- Legal Column -->
+          <div>
+            <h3 class="font-medium text-sm mb-3 text-indigo-200">Legal</h3>
+            <ul class="space-y-1.5">
+              <li><a routerLink="/privacy-policy" class="text-xs text-indigo-100 hover:text-white transition-colors">Privacy Policy</a></li>
+              <li><a routerLink="/terms" class="text-xs text-indigo-100 hover:text-white transition-colors">Terms of Service</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Bottom Section with Copyright and Download App -->
+      <div class="pt-6 mt-6 border-t border-indigo-800/50 flex flex-col md:flex-row justify-between items-center">
+        <p class="text-indigo-200 text-xs">
+          &copy; 2025 Nestify. All rights reserved.
+        </p>
+        
+        <div class="flex items-center mt-3 md:mt-0">
+          <span class="text-indigo-200 text-xs mr-3">Get our app</span>
+          <div class="flex space-x-2">
+            <a href="#" class="transition-transform hover:scale-105">
+              <img src="assets/page1_icon.png" alt="App Store" class="h-6">
+            </a>
+            <a href="#" class="transition-transform hover:scale-105">
+              <img src="assets/page2_icon.png" alt="Google Play" class="h-6">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- Modern Mobile Bottom Nav with Stylish Icons -->  
+  <div class="fixed bottom-0 left-0 right-0 bg-white shadow-lg rounded-t-xl z-40 md:hidden">
+    <div class="flex justify-between items-center px-3 py-3">
+      <a routerLink="/" class="flex flex-col items-center justify-center w-1/5" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <div class="mobile-icon-circle bg-gradient-to-r from-indigo-400 to-blue-500">
+          <i class="fas fa-home"></i>
+        </div>
+        <span class="text-xs mt-2 font-medium mobile-nav-text home-text">Home</span>
+      </a>
+      <a routerLink="/properties/residential" class="flex flex-col items-center justify-center w-1/5" routerLinkActive="active">
+        <div class="mobile-icon-circle bg-gradient-to-r from-purple-400 to-indigo-500">
+          <i class="fas fa-building"></i>
+        </div>
+        <span class="text-xs mt-2 font-medium mobile-nav-text buy-text">Buy</span>
+      </a>
+      <a routerLink="/properties/commercial" class="flex flex-col items-center justify-center w-1/5" routerLinkActive="active">
+        <div class="mobile-icon-circle bg-gradient-to-r from-amber-400 to-orange-500">
+          <i class="fas fa-key"></i>
+        </div>
+        <span class="text-xs mt-2 font-medium mobile-nav-text rent-text">Rent</span>
+      </a>
+      <a routerLink="/short-stays/serviced-apartments" class="flex flex-col items-center justify-center w-1/5" routerLinkActive="active">
+        <div class="mobile-icon-circle bg-gradient-to-r from-teal-400 to-emerald-500">
+          <i class="fas fa-hotel"></i>
+        </div>
+        <span class="text-xs mt-2 font-medium mobile-nav-text stay-text">Stay</span>
+      </a>
+      <a routerLink="/help/contact-support" class="flex flex-col items-center justify-center w-1/5" routerLinkActive="active">
+        <div class="mobile-icon-circle bg-gradient-to-r from-cyan-400 to-blue-500">
+          <i class="fas fa-envelope"></i>
+        </div>
+        <span class="text-xs mt-2 font-medium mobile-nav-text contact-text">Contact</span>
+      </a>
+    </div>
+  </div>
+  
+  <div class="pb-20"></div>

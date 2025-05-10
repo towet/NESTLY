@@ -1,0 +1,152 @@
+<!-- Residential Properties -->
+<app-header></app-header>
+
+<div class="residential-wrapper">
+  <div class="container mx-auto px-4 py-8">
+    <div class="mb-8 text-center">
+      <h1 class="text-3xl font-bold text-gray-900 mb-3">Residential Properties</h1>
+      <p class="text-gray-600 max-w-2xl mx-auto">
+        Discover your dream home from our selection of high-quality residential properties. Whether you're looking for an apartment, house, or land, we've got you covered.
+      </p>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs mb-8 flex justify-center">
+      <button 
+        class="filter-tab" 
+        [class.active]="selectedSubCategory === 'All'"
+        (click)="filterBySubCategory('All')">
+        All Properties
+      </button>
+      <button 
+        *ngFor="let category of subCategories" 
+        class="filter-tab" 
+        [class.active]="selectedSubCategory === category"
+        (click)="filterBySubCategory(category)">
+        {{ category }}
+      </button>
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="loading-container">
+      <div class="spinner"></div>
+      <p>Loading residential properties...</p>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="error" class="error-container bg-red-50 text-red-800 p-4 rounded-lg mb-8">
+      <h3 class="font-semibold text-lg mb-2">Oops! Something went wrong</h3>
+      <p class="mb-3">{{ error }}</p>
+      <button 
+        (click)="retryFetch()" 
+        class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors">
+        Try Again
+      </button>
+    </div>
+
+    <!-- No Listings State -->
+    <div *ngIf="!isLoading && !error && filteredListings.length === 0" class="no-listings-container">
+      <i class="fas fa-home no-listings-icon"></i>
+      <h3>No Properties Found</h3>
+      <p>We couldn't find any properties matching your criteria. Please try a different filter or check back later.</p>
+      <button 
+        *ngIf="selectedSubCategory !== 'All'" 
+        (click)="filterBySubCategory('All')" 
+        class="reset-button">
+        View All Properties
+      </button>
+    </div>
+
+    <!-- Listings Grid -->
+    <div *ngIf="!isLoading && !error && filteredListings.length > 0" class="listings-grid">
+      <div 
+        *ngFor="let listing of filteredListings; let i = index"
+        class="listing-card scroll-reveal"
+        [style.--card-index]="i"
+        [style.animation-delay]="i * 0.05 + 's'"
+        #listingCard
+        (click)="navigateToPropertyDetails(listing.id)">
+        <div class="card-inner">
+          <!-- Image Container -->
+          <div class="card-image-container">
+            <!-- Image placeholder shown during loading -->
+            <div class="image-placeholder shimmer"></div>
+            <img 
+              [src]="listing.images?.[0] || defaultImage" 
+              [alt]="listing.title"
+              class="card-image"
+              [attr.loading]="i < 4 ? 'eager' : 'lazy'" 
+              [attr.fetchpriority]="i < 4 ? 'high' : 'auto'" 
+              width="100%" height="240">
+            <div class="card-price">KES {{ listing.price | number }}</div>
+            <button class="favorite-button" (click)="$event.stopPropagation()">
+              <i class="far fa-heart"></i>
+            </button>
+          </div>
+
+          <!-- Card Content -->
+          <div class="card-content">
+            <h3 class="card-title">{{ listing.title }}</h3>
+            
+            <!-- Property Details with Colorful Icons -->
+            <div class="card-details">
+              <!-- First row: Location and Type side by side -->
+              <div class="details-row">
+                <div class="detail-item">
+                  <div class="icon-circle location-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                  </div>
+                  <span>{{ listing.location }}</span>
+                </div>
+                
+                <div class="detail-item">
+                  <div class="icon-circle type-icon">
+                    <i class="fas fa-home"></i>
+                  </div>
+                  <span>{{ listing.subCategory || 'Residential' }}</span>
+                </div>
+              </div>
+              
+              <!-- Second row: Beds and Baths side by side -->
+              <div class="details-row" *ngIf="listing.bedrooms || listing.bathrooms">
+                <div class="detail-item" *ngIf="listing.bedrooms">
+                  <div class="icon-circle beds-icon">
+                    <i class="fas fa-bed"></i>
+                  </div>
+                  <span>{{ listing.bedrooms }} Bedroom<span *ngIf="listing.bedrooms > 1">s</span></span>
+                </div>
+                
+                <div class="detail-item" *ngIf="listing.bathrooms">
+                  <div class="icon-circle baths-icon">
+                    <i class="fas fa-bath"></i>
+                  </div>
+                  <span>{{ listing.bathrooms }} Bathroom<span *ngIf="listing.bathrooms > 1">s</span></span>
+                </div>
+              </div>
+              
+              <!-- Property Size if available -->
+              <div class="detail-item" *ngIf="listing.propertySize">
+                <div class="icon-circle size-icon">
+                  <i class="fas fa-ruler-combined"></i>
+                </div>
+                <span>{{ listing.propertySize }} sq ft</span>
+              </div>
+            </div>
+            
+            <!-- Amenities Pills (if available) -->
+            <div class="amenities-pills flex flex-wrap gap-2 mt-3" *ngIf="listing.amenities?.length">
+              <div 
+                *ngFor="let amenity of listing.amenities" 
+                class="pill-tag text-xs px-3 py-1 bg-gray-100 text-gray-700 rounded-full flex items-center">
+                <i class="fas fa-check text-green-500 mr-1"></i>
+                {{ amenity }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

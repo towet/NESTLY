@@ -1,0 +1,149 @@
+<div class="retail-wrapper min-h-screen">
+  <app-header></app-header>
+  
+  <main class="flex-1 w-full bg-gray-50 pt-20 pb-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <h1 class="text-3xl font-extrabold text-gray-900 mb-6">Retail Spaces</h1>
+      
+      <!-- Filter Tabs -->
+      <div class="filter-tabs mb-8">
+        <button 
+          *ngFor="let detail of retailDetails"
+          (click)="filterByDetail(detail)"
+          [class.active]="selectedDetail === detail"
+          class="filter-tab"
+          [attr.aria-selected]="selectedDetail === detail">
+          {{ detail }}
+        </button>
+      </div>
+
+      <!-- Listings Grid -->
+      <div class="listings-grid">
+        <ng-container *ngIf="!isLoading; else loadingTemplate">
+          <ng-container *ngIf="filteredListings.length; else noListingsTemplate">
+            <div *ngFor="let listing of filteredListings; let i = index" 
+                class="listing-card scroll-reveal"
+                (click)="navigateToPropertyDetails(listing.id)"
+                #listingCard>
+              
+              <div class="card-inner">
+                <!-- Image section -->
+                <div class="card-image-container">
+                  <img [src]="listing.images[0] || 'assets/placeholder.jpg'"
+                      [alt]="listing.title"
+                      class="card-image">
+                  <div class="card-price">{{ listing.price | currency:'KSH ' }}</div>
+                  <div class="favorite-button">
+                    <i class="far fa-heart"></i>
+                  </div>
+                </div>
+
+                <!-- Content section -->
+                <div class="card-content">
+                  <h3 class="card-title">{{ listing.title }}</h3>
+                  
+                  <!-- Details with colorful icons -->
+                  <div class="card-details">
+                    <!-- First row with Location and Type side by side -->
+                    <div class="details-row">
+                      <!-- Location -->
+                      <div class="detail-item">
+                        <div class="icon-circle location-icon">
+                          <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <span>{{ listing.location }}</span>
+                      </div>
+                      
+                      <!-- Property Type -->
+                      <div class="detail-item">
+                        <div class="icon-circle type-icon">
+                          <i class="fas fa-store"></i>
+                        </div>
+                        <span>{{ listing.detail }}</span>
+                      </div>
+                    </div>
+                    
+                    <!-- Size on its own row -->
+                    <div class="detail-item">
+                      <div class="icon-circle size-icon">
+                        <i class="fas fa-ruler-combined"></i>
+                      </div>
+                      <span>{{ listing.propertySize }} sq ft</span>
+                    </div>
+                  </div>
+                  
+                  <!-- Amenities -->
+                  <div class="amenities-row">
+                    <div class="amenity-pill" *ngIf="listing.utilities['water']">
+                      <div class="pill-icon water-icon">
+                        <i class="fas fa-tint"></i>
+                      </div>
+                      <span>Water</span>
+                    </div>
+                    
+                    <div class="amenity-pill" *ngIf="listing.utilities['electricity']">
+                      <div class="pill-icon power-icon">
+                        <i class="fas fa-bolt"></i>
+                      </div>
+                      <span>Power</span>
+                    </div>
+                    
+                    <div class="amenity-pill" *ngIf="listing.amenities['security']">
+                      <div class="pill-icon security-icon">
+                        <i class="fas fa-shield-alt"></i>
+                      </div>
+                      <span>Security</span>
+                    </div>
+                    
+                    <div class="amenity-pill" *ngIf="listing.amenities['parking']">
+                      <div class="pill-icon parking-icon">
+                        <i class="fas fa-parking"></i>
+                      </div>
+                      <span>Parking</span>
+                    </div>
+                    
+                    <div class="amenity-pill" *ngIf="listing.amenities['wifi']">
+                      <div class="pill-icon wifi-icon">
+                        <i class="fas fa-wifi"></i>
+                      </div>
+                      <span>WiFi</span>
+                    </div>
+                    
+                    <div class="amenity-pill" *ngIf="listing.amenities['airConditioning']">
+                      <div class="pill-icon ac-icon">
+                        <i class="fas fa-snowflake"></i>
+                      </div>
+                      <span>AC</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+      
+      <!-- Loading Template -->
+      <ng-template #loadingTemplate>
+        <div class="loading-container">
+          <div class="spinner"></div>
+          <p>Loading retail spaces...</p>
+        </div>
+      </ng-template>
+      
+      <!-- No Listings Template -->
+      <ng-template #noListingsTemplate>
+        <div class="no-listings-container">
+          <i class="fas fa-store-slash no-listings-icon"></i>
+          <h3>No retail spaces found</h3>
+          <p>We couldn't find any retail spaces matching your criteria.</p>
+          <button class="reset-button" (click)="filterByDetail('All')">
+            View All Retail Spaces
+          </button>
+        </div>
+      </ng-template>
+    </div>
+  </main>
+  
+  <app-footer></app-footer>
+</div>
