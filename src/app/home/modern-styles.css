@@ -55,6 +55,19 @@ header {
   box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
 }
 
+/* Fix for dropdown option text color */
+.form-select option {
+  color: #1e293b; /* Dark text for dropdown options */
+  background-color: white;
+  padding: 10px;
+}
+
+/* Ensure the select dropdown is styled properly in all browsers */
+.form-select {
+  appearance: auto; /* Use browser's native styling for dropdowns */
+  padding-right: 2rem; /* Space for the dropdown arrow */
+}
+
 
 
 .feed-card {

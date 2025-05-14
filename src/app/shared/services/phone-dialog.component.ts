@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-phone-dialog',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, MatDialogModule],
   template: `
   <div class="modal-overlay">
   <div class="modal-content">
@@ -31,12 +32,15 @@ import { MatDialogRef } from '@angular/material/dialog';
             <span class="code">+254</span>
           </div>
           <input
+            #phoneInput
             id="phoneNumber"
             type="tel"
             formControlName="phoneNumber"
             placeholder="712345678"
             class="form-input phone-input"
+            autocomplete="tel"
             [class.error]="isFieldInvalid('phoneNumber')"
+            (click)="phoneInput.focus()"
           >
         </div>
         <div class="error-messages" *ngIf="phoneForm.get('phoneNumber')?.touched">
@@ -256,9 +260,11 @@ import { MatDialogRef } from '@angular/material/dialog';
   `]
 })
 
-export class PhoneDialogComponent {
+export class PhoneDialogComponent implements AfterViewInit {
   phoneForm: FormGroup;
   isSubmitting = false;
+  
+  @ViewChild('phoneInput') phoneInput!: ElementRef<HTMLInputElement>;
 
   constructor(
     private fb: FormBuilder,
@@ -270,6 +276,28 @@ export class PhoneDialogComponent {
         Validators.pattern('^[7][0-9]{8}$')
       ]]
     });
+    
+    // Set dialog configuration
+    this.dialogRef.disableClose = true;
+    this.dialogRef.backdropClick().subscribe(() => {
+      // Refocus the input if the backdrop is clicked
+      setTimeout(() => {
+        this.focusInput();
+      }, 100);
+    });
+  }
+  
+  ngAfterViewInit() {
+    // Set a timeout to focus the input field after the dialog is fully rendered
+    setTimeout(() => {
+      this.focusInput();
+    }, 300);
+  }
+  
+  focusInput() {
+    if (this.phoneInput && this.phoneInput.nativeElement) {
+      this.phoneInput.nativeElement.focus();
+    }
   }
 
   isFieldInvalid(fieldName: string): boolean {

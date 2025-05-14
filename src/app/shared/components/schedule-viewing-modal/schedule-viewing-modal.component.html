@@ -1,34 +1,50 @@
 <div class="modal-header">
     <h4 class="modal-title">Schedule Property Viewing</h4>
-    <button type="button" class="close-btn" (click)="close()">
+    <button type="button" class="close-btn" (click)="close()" aria-label="Close">
         <i class="fas fa-times"></i>
     </button>
 </div>
 <div class="modal-body">
+    <div class="mb-4 intro-message bg-blue-50 p-3 rounded-lg">
+        <div class="flex items-start">
+            <i class="fas fa-info-circle text-blue-500 mt-1 mr-3"></i>
+            <p class="text-sm text-gray-700">Schedule a convenient time to view this property. Our agent will confirm your appointment and provide further details.</p>
+        </div>
+    </div>
     <form [formGroup]="scheduleForm">
-        <div class="mb-3">
+        <div class="mb-4">
             <label for="visitorName" class="form-label">Your Name</label>
             <input type="text" 
                    class="form-control" 
                    id="visitorName" 
+                   placeholder="Enter your full name"
                    formControlName="visitorName"
                    [class.is-invalid]="isFieldInvalid('visitorName')">
             <div class="invalid-feedback" *ngIf="isFieldInvalid('visitorName')">
                 {{ getErrorMessage('visitorName') }}
             </div>
         </div>
-        <div class="mb-3">
+        <div class="mb-4">
             <label for="visitorPhone" class="form-label">Phone Number</label>
-            <input type="tel" 
-                   class="form-control" 
-                   id="visitorPhone" 
-                   formControlName="visitorPhone"
-                   [class.is-invalid]="isFieldInvalid('visitorPhone')">
+            <div class="phone-input-wrapper relative">
+                <div class="country-code-prefix absolute left-0 top-0 bottom-0 flex items-center px-3 text-gray-600 border-r border-gray-200">
+                    <span class="text-sm">+254</span>
+                </div>
+                <input type="tel" 
+                       class="form-control pl-16" 
+                       id="visitorPhone" 
+                       placeholder="712345678"
+                       formControlName="visitorPhone"
+                       [class.is-invalid]="isFieldInvalid('visitorPhone')">
+            </div>
             <div class="invalid-feedback" *ngIf="isFieldInvalid('visitorPhone')">
                 {{ getErrorMessage('visitorPhone') }}
             </div>
+            <div class="text-xs text-gray-500 mt-1">
+                <i class="fas fa-shield-alt mr-1"></i> Your number is only shared with the property agent
+            </div>
         </div>
-        <div class="mb-3">
+        <div class="mb-4">
             <label for="scheduledDateTime" class="form-label">Preferred Date & Time</label>
             <input type="datetime-local" 
                    class="form-control" 
@@ -38,15 +54,20 @@
             <div class="invalid-feedback" *ngIf="isFieldInvalid('scheduledDateTime')">
                 {{ getErrorMessage('scheduledDateTime') }}
             </div>
+            <div class="text-xs text-gray-500 mt-1">
+                <i class="fas fa-clock mr-1"></i> Viewings available from 8 AM to 6 PM daily
+            </div>
         </div>
     </form>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-outline-secondary" (click)="close()">Cancel</button>
+    <button type="button" class="btn btn-outline-secondary" (click)="close()">
+        <i class="fas fa-times mr-1"></i> Cancel
+    </button>
     <button type="button" 
             class="btn btn-primary" 
             (click)="submitForm()" 
             [disabled]="!scheduleForm.valid">
-        Schedule Viewing
+        <i class="fas fa-calendar-check mr-1"></i> Schedule Viewing
     </button>
 </div>

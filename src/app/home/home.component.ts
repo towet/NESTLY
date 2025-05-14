@@ -728,30 +728,31 @@ async performSearch() {
   }
 
   this.isLoading = true;
+  
+  // For testing purposes, clear the stored phone number to ensure dialog shows
+  // Remove this line in production if you want to keep users logged in
+  // this.phoneService.clearPhoneNumber();
+  
+  // Always show phone dialog after search
+  const dialogRef = this.dialog.open(PhoneDialogComponent, {
+    width: '400px',
+    disableClose: true,
+    panelClass: 'modern-dialog',
+    autoFocus: true,
+    position: { top: '100px' }
+  });
 
-  // Check if phone number exists
-  if (!this.phoneService.hasPhoneNumber()) {
-    // Show phone dialog
-    const dialogRef = this.dialog.open(PhoneDialogComponent, {
-      width: '400px',
-      disableClose: true
-    });
-
-    // Handle the dialog result
-    dialogRef.afterClosed().subscribe((result: string | undefined) => {
-      if (result) {
-        // Save the phone number
-        this.phoneService.savePhoneNumber(result);
-        // Proceed with search
-        this.executeSearch();
-      } else {
-        this.isLoading = false; // Reset loading if dialog was cancelled
-      }
-    });
-  } else {
-    // If we already have the phone number, proceed directly
-    this.executeSearch();
-  }
+  // Handle the dialog result
+  dialogRef.afterClosed().subscribe((result: string | undefined) => {
+    if (result) {
+      // Save the phone number
+      this.phoneService.savePhoneNumber(result);
+      // Proceed with search
+      this.executeSearch();
+    } else {
+      this.isLoading = false; // Reset loading if dialog was cancelled
+    }
+  });
 }
 
 private validateSearch(): boolean {
