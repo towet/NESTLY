@@ -185,9 +185,9 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     return this.propertySlides.map(slide => slide.image);
   }
 
-  // Initialize hero section elements
-  isPremiumHeroVisible = true;
-  isSearchFormVisible = false;
+  // Search form is now always visible as landing page
+  isPremiumHeroVisible = false;
+  isSearchFormVisible = true;
 
   // Toggle search form visibility
   toggleSearchForm() {

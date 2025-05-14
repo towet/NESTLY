@@ -4,95 +4,9 @@
 
   <!-- MAIN CONTENT with normal padding for standard header height -->
   <main class="flex-1 w-full bg-gray-50">
-    <!-- Premium Luxury Hero Section with Advanced Animations -->
-    <div class="premium-hero-section">
-      <!-- Animated particles overlay -->
-      <div class="premium-particles">
-        <div class="particle particle-1"></div>
-        <div class="particle particle-2"></div>
-        <div class="particle particle-3"></div>
-        <div class="particle particle-4"></div>
-        <div class="particle particle-5"></div>
-      </div>
-      
-      <!-- Main Content Container -->
-      <div class="hero-content-container relative z-20 h-full flex items-center">
-        <div class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
-          
-          <!-- Left Column: Text Content with Premium Animations -->
-          <div class="hero-text-content w-full lg:w-1/2 text-white mt-20 lg:mt-0">
-            <!-- Animated Badge -->
-            <div class="inline-flex items-center bg-gradient-to-r from-amber-500 to-amber-600 px-3 py-1 rounded-full mb-5 premium-animate-up" style="--delay: 0.2s">
-              <i class="fas fa-star text-white mr-2 premium-pulse"></i>
-              <span class="text-sm font-semibold uppercase tracking-wide">Premium Experience</span>
-            </div>
-            
-            <!-- Main Headline with Split Text Animation -->
-            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-6 premium-animate-title">
-              <span class="block premium-animate-up" style="--delay: 0.4s">Luxury</span>
-              <span class="block premium-animate-up" style="--delay: 0.6s">Serviced</span>
-              <span class="block premium-animate-up" style="--delay: 0.8s">Apartments</span>
-            </h1>
-            
-            <!-- Description Text -->
-            <p class="text-base sm:text-lg text-gray-100 mb-8 max-w-xl premium-animate-up" style="--delay: 1s">
-              Experience the perfect blend of hotel luxury and home comfort in our premium selection of serviced apartments.
-            </p>
-            
-            <!-- Award-Winning Premium Stats Showcase (Moved Back Inside) -->
-            <div class="premium-stats-container premium-animate-up" style="--delay: 1.2s">
-                
-              <!-- Apartments Stat Item -->
-              <div class="premium-stat-item apartments-stat">
-                <div class="stat-icon-wrapper">
-                  <i class="fas fa-building"></i>
-                </div>
-                <div class="stat-content">
-                  <div class="stat-value counter-value" data-target="500">0<sup>+</sup></div>
-                  <div class="stat-label">Apartments</div>
-                </div>
-              </div>
-              
-              <!-- Locations Stat Item -->
-              <div class="premium-stat-item locations-stat">
-                <div class="stat-icon-wrapper">
-                  <i class="fas fa-map-marker-alt"></i>
-                </div>
-                <div class="stat-content">
-                  <div class="stat-value counter-value" data-target="20">0<sup>+</sup></div>
-                  <div class="stat-label">Locations</div>
-                </div>
-              </div>
-              
-              <!-- Average Rating Stat Item -->
-              <div class="premium-stat-item rating-stat">
-                <div class="stat-icon-wrapper">
-                  <i class="fas fa-star"></i>
-                </div>
-                <div class="stat-content">
-                  <div class="stat-value counter-value" data-target="4.9">0.0</div>
-                  <div class="stat-label">Average Rating</div>
-                  <div class="star-rating-premium">
-                    <span class="star active"><i class="fas fa-star"></i></span>
-                    <span class="star active"><i class="fas fa-star"></i></span>
-                    <span class="star active"><i class="fas fa-star"></i></span>
-                    <span class="star active"><i class="fas fa-star"></i></span>
-                    <span class="star half-active"><i class="fas fa-star-half-alt"></i></span>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-          </div>
-        
-          <!-- Right Column: Interactive Property Search Trigger Card -->
-          <div class="w-full lg:w-1/2 flex justify-center lg:justify-end items-center relative z-30">
-          </div>
-        </div>
-      </div>
-    </div>
-  <!-- PROPERTY SEARCH SECTION BELOW HERO -->  
-  <section class="property-search-section py-10 bg-white">
+  <!-- PROPERTY SEARCH SECTION - NEW LANDING PAGE -->  
+  <section class="property-search-section py-16 lg:py-20 bg-gradient-to-b from-indigo-50 to-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <!-- Left Column: Search Form -->
@@ -228,11 +142,39 @@
             </div>
             
             <div class="form-group">
-              <label class="block text-sm font-medium text-white mb-1">Fully Serviced Purchase?</label>
-              <label class="inline-flex items-center">
-                <input type="checkbox" [(ngModel)]="search.fullyServicedPurchase" class="form-checkbox text-indigo-600" />
-                <span class="ml-2 text-sm text-white">Yes, let Nestify handle it all</span>
-              </label>
+              <!-- Premium Toggle Card -->
+              <div class="luxury-toggle-card relative overflow-hidden rounded-xl p-4 border border-indigo-500/20 backdrop-blur">
+                <!-- Background gradient effects -->
+                <div class="absolute -right-20 -top-20 w-40 h-40 rounded-full blur-3xl bg-gradient-to-br from-indigo-800/10 to-violet-700/10"></div>
+                <div class="absolute -left-10 -bottom-10 w-32 h-32 rounded-full blur-2xl bg-gradient-to-tr from-amber-500/10 to-red-500/10"></div>
+                
+                <!-- Header with title and toggle -->
+                <div class="flex items-center justify-between relative z-10">
+                  <div class="flex items-center">
+                    <div class="flex-shrink-0 h-9 w-9 rounded-lg bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center shadow-lg mr-3 rotate-3 animate-pulse">
+                      <i class="fas fa-concierge-bell text-white"></i>
+                    </div>
+                    <div>
+                      <h3 class="text-base font-bold text-white leading-tight">Fully Serviced Purchase?</h3>
+                      <p class="text-xs text-indigo-200 mt-0.5">{{ search.fullyServicedPurchase ? 'Yes, let Nestify handle it all' : 'No' }}</p>
+                    </div>
+                  </div>
+                  
+                  <!-- iOS-Style Toggle Switch -->
+                  <div class="ios-toggle relative">
+                    <input type="checkbox" [(ngModel)]="search.fullyServicedPurchase" 
+                           id="toggle-serviced"
+                           class="sr-only">
+                    <label for="toggle-serviced" 
+                           class="toggle-track block w-14 h-8 rounded-full cursor-pointer transition-colors duration-300 ease-in-out"
+                           [ngClass]="{'from-indigo-500 to-purple-600 bg-gradient-to-r border-purple-300': search.fullyServicedPurchase, 
+                           'bg-gray-700 border-gray-600': !search.fullyServicedPurchase}">
+                      <span class="toggle-indicator block w-6 h-6 mt-1 ml-1 bg-white rounded-full shadow-md transform transition-transform duration-300 ease-in-out"
+                            [ngClass]="{'translate-x-6': search.fullyServicedPurchase}"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>             
             </div>
             <!-- Search Button -->
             <div class="form-group">
@@ -265,17 +207,7 @@
             <!-- Gradient Overlay for Text Readability -->
             <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-70 z-10"></div>
             
-            <!-- Navigation Arrows with Improved Styling -->
-            <button class="carousel-arrow left-arrow" (click)="prevImage()">
-              <div class="arrow-icon-container">
-                <i class="fas fa-chevron-left"></i>
-              </div>
-            </button>
-            <button class="carousel-arrow right-arrow" (click)="nextImage()">
-              <div class="arrow-icon-container">
-                <i class="fas fa-chevron-right"></i>
-              </div>
-            </button>
+            <!-- Navigation arrows have been removed -->
             
             <!-- Property Images with Transition Effect -->
             <div class="carousel-container">
