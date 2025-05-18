@@ -35,12 +35,13 @@ import { MatDialogModule } from '@angular/material/dialog';
             #phoneInput
             id="phoneNumber"
             type="tel"
-            formControlName="phoneNumber"
             placeholder="712345678"
             class="form-input phone-input"
             autocomplete="tel"
             [class.error]="isFieldInvalid('phoneNumber')"
             (click)="phoneInput.focus()"
+            (input)="handleInput($event)"
+            [value]="phoneForm.get('phoneNumber')?.value || ''"
           >
         </div>
         <div class="error-messages" *ngIf="phoneForm.get('phoneNumber')?.touched">
@@ -150,6 +151,8 @@ import { MatDialogModule } from '@angular/material/dialog';
       border: 2px solid #e2e8f0;
       border-radius: 6px;
       font-size: 1rem;
+      color: #1a202c;
+      background-color: #ffffff;
       transition: all 0.3s ease;
     }
 
@@ -330,5 +333,31 @@ export class PhoneDialogComponent implements AfterViewInit {
       phoneNumber = phoneNumber.substring(1);
     }
     this.phoneForm.patchValue({ phoneNumber }, { emitEvent: false });
+  }
+  
+  handleInput(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    let value = inputElement.value;
+    
+    // Only allow numeric input
+    const numericValue = value.replace(/\D/g, '');
+    
+    // Format the phone number if needed
+    if (numericValue.startsWith('254')) {
+      value = numericValue.substring(3);
+    } else if (numericValue.startsWith('0')) {
+      value = numericValue.substring(1);
+    } else {
+      value = numericValue;
+    }
+    
+    // Update the form control
+    this.phoneForm.patchValue({ phoneNumber: value });
+    this.phoneForm.markAsTouched();
+    
+    // Update the input field value if it was modified
+    if (value !== inputElement.value) {
+      inputElement.value = value;
+    }
   }
 }
