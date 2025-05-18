@@ -2,11 +2,10 @@
 .about-container {
     font-family: "Inter", sans-serif;
     background-color: #fff;
-    margin-top: 4rem;
+    padding-top: 80px; /* Space for fixed header */
     
-  
-    header {
-      /* Same styling from your existing nav, consistent with home. */
+    @media (max-width: 768px) {
+      padding-top: 70px; /* Adjust for smaller header on mobile */
     }
   }
   
@@ -435,13 +434,16 @@
   }
 
   .cta-inner {
-    /* Additional spacing or styling if needed */
+    padding: 2rem;
   }
   .cta-heading {
-    /* For your H2 heading styling */
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
   }
   .cta-text {
-    /* For your paragraph styling */
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
   }
   .cta-button {
     /* For your button styling */

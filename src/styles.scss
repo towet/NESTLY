@@ -2,9 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import our mobile fixes */
+@import 'app/shared/styles/mobile-fixes.scss';
+
+/* Global modal container styling */
 .modal-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+/* Global page content container styling */
+.page-content {
+  padding-top: 80px; /* Space for fixed header */
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Fix padding for pages with sections */
+.section {
+  position: relative;
+  z-index: 1;
+}
+
+/* Mobile optimizations for all pages */
+@media (max-width: 768px) {
+  .page-content {
+    padding-top: 70px;
   }
+  
+  /* Ensure proper spacing for containers */
+  .container,
+  .container-fluid {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 100%;
+  }
+  
+  /* Fix margin issues on mobile */
+  .row {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+
+/* Fix for Angular Material dialogs */
+.mat-dialog-container {
+  margin-top: 70px;
+}
+
+/* Improve form element visibility on mobile */
+input, select, textarea, .form-control {
+  background-color: white;
+  color: #333333;
+  border: 1px solid #ced4da;
+}

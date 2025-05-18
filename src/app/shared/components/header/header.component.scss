@@ -6,6 +6,8 @@ header {
   border-bottom: 1px solid rgba(229, 231, 235, 0.5);
   z-index: 40; /* Ensures the header stays on top */
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: fixed; /* Keep it fixed */
+  width: 100%; /* Full width */
   
   &.scrolled {
     background: rgba(255, 255, 255, 0.98);

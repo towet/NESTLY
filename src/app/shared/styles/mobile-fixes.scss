@@ -1,0 +1,50 @@
+/* 
+  Global mobile fixes for NESTLY application
+  These styles ensure that content doesn't hide behind fixed headers on mobile devices
+*/
+
+/* Main content padding for all pages */
+.main-content {
+  padding-top: 80px !important; /* Space for fixed header */
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Adjust padding for different screen sizes */
+@media (max-width: 768px) {
+  .main-content {
+    padding-top: 70px !important;
+  }
+  
+  /* Ensure proper spacing for containers */
+  .container-fluid,
+  .container {
+    padding-top: 0.5rem;
+  }
+}
+
+/* Fix for page sections that might get hidden */
+.page-section {
+  position: relative;
+  z-index: 1;
+  margin-top: 1rem;
+}
+
+/* Ensure fixed header doesn't hide content */
+app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Higher z-index to stay on top */
+}
+
+/* Modal adjustments for mobile */
+.modal-dialog {
+  margin-top: 80px;
+}
+
+/* Ensure property cards are fully visible */
+.property-card {
+  margin-bottom: 1.5rem;
+}

@@ -218,6 +218,7 @@
 
 /* Apply to the search form container within the property-search-section */
 .property-search-section {
+  margin-top: 10px; /* Add some space on mobile */
   padding: 6rem 0 4rem;
   background: linear-gradient(135deg, #f0f4ff 0%, #ffffff 100%);
   position: relative;

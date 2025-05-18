@@ -1,9 +1,9 @@
-<app-header></app-header>
+<!-- Property Details Page - Note: Header now handled by app.component.html -->
 
 <!-- Property Showcase Section -->
 <div class="property-showcase" *ngIf="property">
   <!-- Premium Image Gallery -->
-  <div class="premium-image-gallery" *ngIf="property?.images?.length" data-aos="fade-up" data-aos-duration="800">
+  <div class="premium-image-gallery" *ngIf="property.images.length" data-aos="fade-up" data-aos-duration="800">
     <!-- Main hero image -->
     <div class="gallery-container">
       <!-- Large hero image -->
@@ -135,29 +135,29 @@
         </div>
         <div class="type-content">
           <div class="type-label">Category</div>
-          <div class="type-value">{{ formatLabel(property?.['category'] || '') }}</div>
+          <div class="type-value">{{ formatLabel(property.category || '') }}</div>
         </div>
       </div>
       
       <!-- Sub-category -->
-      <div class="type-card" *ngIf="property?.['subCategory']" data-aos="fade-right" data-aos-delay="100">
+      <div class="type-card" *ngIf="property.subCategory" data-aos="fade-right" data-aos-delay="50">
         <div class="type-icon">
           <i class="fas fa-home"></i>
         </div>
         <div class="type-content">
           <div class="type-label">Sub-category</div>
-          <div class="type-value">{{ formatLabel(property?.['subCategory'] || '') }}</div>
+          <div class="type-value">{{ formatLabel(property.subCategory || '') }}</div>
         </div>
       </div>
       
       <!-- Detail -->
-      <div class="type-card" *ngIf="property?.['detail']" data-aos="fade-right" data-aos-delay="200">
+      <div class="type-card" *ngIf="property.yearBuilt" data-aos="fade-right" data-aos-delay="150">
         <div class="type-icon">
           <i class="fas fa-info-circle"></i>
         </div>
         <div class="type-content">
           <div class="type-label">Detail</div>
-          <div class="type-value">{{ formatLabel(property?.['detail'] || '') }}</div>
+          <div class="type-value">{{ formatLabel(property.detail || '') }}</div>
         </div>
       </div>
     </div>
@@ -289,12 +289,12 @@
       <div class="identity-content">
         <h4 class="property-title">{{ property.title }}</h4>
         <div class="property-category">
-          <span class="category-type">{{ property?.propertyType }}</span>
+          <span class="category-type">{{ property.propertyType }}</span>
           <span class="separator">
             <i class="fas fa-circle"></i>
           </span>
-          <span class="sub-category">{{ formatLabel(property?.subCategory || '') }}</span>
-          <span *ngIf="property?.detail" class="detail">
+          <span class="sub-category">{{ formatLabel(property.subCategory || '') }}</span>
+          <span *ngIf="property.detail" class="detail">
             <i class="fas fa-angle-right"></i> {{ property.detail }}
           </span>
         </div>
@@ -317,7 +317,7 @@
               <i class="fas fa-ruler-combined"></i>
             </div>
             <div class="stat-info">
-              <div class="stat-value">{{ property && property['size'] || '5000' }}<span class="stat-unit">sq ft</span></div>
+              <div class="stat-value">{{ property.propertySize || '5000' }}<span class="stat-unit">sq ft</span></div>
               <div class="stat-label">PROPERTY SIZE</div>
             </div>
           </div>
@@ -328,7 +328,7 @@
               <i class="fas fa-bed"></i>
             </div>
             <div class="stat-info">
-              <div class="stat-value">{{ property?.bedrooms || '0' }}</div>
+              <div class="stat-value">{{ property.amenities.length || '0' }}</div>
               <div class="stat-label">BEDROOMS</div>
             </div>
           </div>
@@ -339,7 +339,7 @@
               <i class="fas fa-bath"></i>
             </div>
             <div class="stat-info">
-              <div class="stat-value">{{ property?.bathrooms || '4' }}</div>
+              <div class="stat-value">{{ property.bathrooms || '4' }}</div>
               <div class="stat-label">BATHROOMS</div>
             </div>
           </div>
@@ -350,7 +350,7 @@
               <i class="fas fa-calendar-alt"></i>
             </div>
             <div class="stat-info">
-              <div class="stat-value">{{ property?.['yearBuilt'] || '2017' }}</div>
+              <div class="stat-value">{{ property.yearBuilt || '2017' }}</div>
               <div class="stat-label">YEAR BUILT</div>
             </div>
           </div>
@@ -370,7 +370,7 @@
               <span class="status-indicator">
                 <i class="fas fa-circle"></i>
               </span>
-              This home is <strong class="furnishing-type">{{ property?.['furnishing'] || 'unfurnished' }}</strong>
+              This home is <strong class="furnishing-type">{{ property.furnishing || 'unfurnished' }}</strong>
             </div>
             
             <div class="utilities-badges">
@@ -454,7 +454,7 @@
                 </ng-template>
                 <ng-template ngbPanelContent>
                   <p [class.line-clamp-3]="!showFullDescription">
-                    {{ property?.description }}
+                    {{ property.description }}
                   </p>
                   <button *ngIf="property.description.length > 300" 
                           class="btn btn-link p-0"
@@ -477,63 +477,63 @@
                     <div class="col-md-6">
                       <div class="detail-item">
                         <span class="detail-label">Property Type</span>
-                        <span class="detail-value">{{ property?.propertyType }}</span>
+                        <span class="detail-value">{{ property.propertyType }}</span>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="detail-item">
                         <span class="detail-label">Category</span>
-                        <span class="detail-value">{{ property?.category }}</span>
+                        <span class="detail-value">{{ property.category }}</span>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="detail-item">
                         <span class="detail-label">Sub-category</span>
-                        <span class="detail-value">{{ property?.subCategory }}</span>
+                        <span class="type-value">{{ property.subCategory || 'Unspecified' }}</span>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="detail-item">
                         <span class="detail-label">Detail</span>
-                        <span class="detail-value">{{ property?.detail }}</span>
+                        <span class="type-value">{{ property.detail || '' }}</span>
                       </div>
                     </div>
                                 <!-- Specifications -->
                     <div class="col-md-6">
                       <div class="detail-item">
                       <span class="detail-label">Bedrooms</span>
-                      <span class="detail-value">{{ property?.bedrooms }}</span>
+                      <span class="detail-value">{{ property.bedrooms }}</span>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="detail-item">
                         <span class="detail-label">Bathrooms</span>
-                        <span class="detail-value">{{ property?.bathrooms }}</span>
+                        <span class="detail-value">{{ property.bathrooms }}</span>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="detail-item">
                         <span class="detail-label">Property Size</span>
-                        <span class="detail-value">{{ property?.propertySize }} sq ft</span>
+                        <span class="detail-value">{{ property.propertySize }} sq ft</span>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="detail-item">
                         <span class="detail-label">Year Built</span>
-                        <span class="detail-value">{{ property?.yearBuilt }}</span>
+                        <span class="type-value">{{ property.yearBuilt || 'Not available' }}</span>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="detail-item">
                         <span class="detail-label">Parking Spaces</span>
-                        <span class="detail-value">{{ property?.parkingSpaces }}</span>
+                        <span class="detail-value">{{ property.parkingSpaces }}</span>
                       </div>
                     </div>
                        <!-- Additional Details -->
-                    <div class="col-md-6" *ngIf="property?.['furnishing']">
+                    <div class="col-md-6" *ngIf="property.furnishing">
                       <div class="detail-item">
                         <span class="detail-label">Furnishing</span>
-                        <span class="detail-value">{{ property?.['furnishing'] }}</span>
+                        <span class="detail-value">{{ property.furnishing }}</span>
                       </div>
                     </div>
                   </div>
@@ -684,7 +684,7 @@
           </div>
           <div class="spec-details">
             <div class="spec-label">Category</div>
-            <div class="spec-value">{{ property.category || 'Commercial' }}</div>
+            <span class="type-value">{{ property.category || 'Unspecified' }}</span>
           </div>
           <div class="hover-accent"></div>
         </div>
